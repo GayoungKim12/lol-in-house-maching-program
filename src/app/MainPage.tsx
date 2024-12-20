@@ -3,31 +3,31 @@ import {Input} from "@/components/ui/input";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {ArrowUpDown, Shuffle} from "lucide-react";
+import {RoleEnum, SameBalancePlayers, TeamRoles, Teams} from "@/app/main.types";
 
-const ROLES = ['탑', '정글', '미드', '원딜', '서폿'];
+const ROLES = Object.values(RoleEnum)
 
 export default function MainPage() {
-    const [pairs, setPairs] = useState(Array(5).fill(0).map(() => ({ player1: '', player2: '' })));
-    const [teamPlayers, setTeamPlayers] = useState({ team1: [], team2: [] });
+    const [pairs, setPairs] = useState<SameBalancePlayers[]>(Array(5).fill(0).map(() => ({ player1: '', player2: '' })));
     const [isMatched, setIsMatched] = useState(false);
-    const [teamRoles, setTeamRoles] = useState({
+    const [teamRoles, setTeamRoles] = useState<TeamRoles>({
         team1: [],
         team2: []
     });
 
-    const handlePlayerChange = (pairIndex, player, value) => {
+    const handlePlayerChange = (pairIndex: number, player: 'player1' | 'player2', value: string) => {
         const newPairs = [...pairs];
         newPairs[pairIndex][player] = value;
         setPairs(newPairs);
     };
 
-    const assignInitialRoles = (team1Players, team2Players) => {
+    const assignInitialRoles = (team1Players: string[], team2Players: string[]) => {
         return {
-            team1: team1Players.map((player, idx) => ({
+            team1: team1Players.map((player: string, idx: number) => ({
                 player,
                 role: ROLES[idx]
             })),
-            team2: team2Players.map((player, idx) => ({
+            team2: team2Players.map((player: string, idx: number) => ({
                 player,
                 role: ROLES[idx]
             }))
@@ -44,8 +44,8 @@ export default function MainPage() {
             return;
         }
 
-        const team1 = [];
-        const team2 = [];
+        const team1: string[] = [];
+        const team2: string[] = [];
 
         pairs.forEach(pair => {
             if (Math.random() < 0.5) {
@@ -57,14 +57,13 @@ export default function MainPage() {
             }
         });
 
-        setTeamPlayers({ team1, team2 });
         setTeamRoles(assignInitialRoles(team1, team2));
         setIsMatched(true);
     };
 
     const resetLines = () => {
         // 각 팀의 플레이어를 무작위로 섞기
-        const shuffleArray = (array) => {
+        const shuffleArray = (array: string[]) => {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -94,25 +93,28 @@ export default function MainPage() {
 
     const resetAll = () => {
         setPairs(Array(5).fill(0).map(() => ({ player1: '', player2: '' })));
-        setTeamPlayers({ team1: [], team2: [] });
         setTeamRoles({ team1: [], team2: [] });
         setIsMatched(false);
     };
 
-    const swapRoles = (team, index1, index2) => {
+    const swapRoles = (team: Teams, index1: number, index2: number) => {
         const newTeamRoles = {
             ...teamRoles,
             [team]: [...teamRoles[team]]
         };
 
+        const randomIndex = Math.floor(Math.random() * 5); // 0~4 중 랜덤 인덱스
+
+        console.log(randomIndex)
+
         const temp = newTeamRoles[team][index1].role;
-        newTeamRoles[team][index1].role = newTeamRoles[team][index2].role;
-        newTeamRoles[team][index2].role = temp;
+        newTeamRoles[team][index1].role = newTeamRoles[team][randomIndex].role;
+        newTeamRoles[team][randomIndex].role = temp;
 
         setTeamRoles(newTeamRoles);
     };
 
-    const renderSwapButton = (team, currentIndex) => {
+    const renderSwapButton = (team: Teams, currentIndex: number) => {
         const nextIndex = (currentIndex + 1) % 5;
         return (
             <Button
