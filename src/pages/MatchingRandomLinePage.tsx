@@ -3,7 +3,7 @@ import { Input } from '@/shared/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Button } from '@/shared/components/ui/button'
 import { Shuffle } from 'lucide-react'
-import { RoleEnum, SameBalancePlayers, TeamRoles } from '@/app/main.types'
+import { RoleEnum, SameBalancePlayers, TeamRoles } from '@/shared/types/teamRole'
 
 const ROLES = Object.values(RoleEnum)
 
