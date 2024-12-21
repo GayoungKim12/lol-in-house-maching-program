@@ -23,9 +23,8 @@ export default function Group({ subheading, menuItems }: GroupProps) {
         <SidebarMenu>
           {menuItems.map((menuItem: MenuItem) => (
             <SidebarMenuItem key={menuItem.to}>
-              <SidebarMenuButton>
-                <Icon name={menuItem.icon} strokeWidth={2} />
-                <Link to={menuItem.to}>{menuItem.label}</Link>
+              <SidebarMenuButton asChild>
+                <Link to={menuItem.to}><Icon name={menuItem.icon} strokeWidth={2} />{menuItem.label}</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
