@@ -14,7 +14,7 @@ export default function MatchingFixedLinePage() {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-center">롤 내전 맞밸 팀 매칭</CardTitle>
+        <CardTitle className="text-center">라인 고정</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">

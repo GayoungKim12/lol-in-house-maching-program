@@ -11,14 +11,14 @@ export default function MatchingRandomLinePage() {
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-center">롤 내전 맞밸 팀 매칭</CardTitle>
+        <CardTitle className="text-center">라인 랜덤</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
           {!isMatched ? (<div className="space-y-4">
             {pairs.map((pair, index) => (<div key={index} className="grid grid-cols-2 gap-4">
               <div className="flex items-center gap-2">
-                <span className="w-6">#{index + 1}</span>
+                <span className="w-12">#{index + 1}</span>
                 <Input
                   value={pair.player1}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => handlePlayerChange(index, 'player1', e.target.value)}
