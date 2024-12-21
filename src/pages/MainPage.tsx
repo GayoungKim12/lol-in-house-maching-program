@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom'
 
 export default function MainPage() {
   return (
-    <div className="flex flex-col mt-36 items-center gap-10 w-full h-full p-10">
+    <div className="flex flex-col justify-center items-center gap-12 w-full h-full pb-32">
       <div className="flex flex-col justify-center items-center gap-6">
-        <h2 className="font-bold text-6xl">Welcome! ●'◡'●</h2>
-        <div className="flex flex-col justify-center items-center gap-3 font-medium text-xl flex-wrap">
-          <p></p>
+        <h2 className="font-bold text-7xl">Welcome! ●'◡'●</h2>
+        <div className="flex flex-col justify-center items-center font-medium text-xl flex-wrap">
           <p>You can choose between Random Line and Fixed Line.</p>
         </div>
       </div>

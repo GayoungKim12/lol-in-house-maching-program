@@ -9,7 +9,7 @@ export default function Layout() {
       <AppSidebar />
       <div className="w-full">
         <Header />
-        <main className="w-full h-full">
+        <main className="w-full h-full p-10">
           <Outlet />
         </main>
       </div>
