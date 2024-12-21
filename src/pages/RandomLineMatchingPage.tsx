@@ -7,7 +7,7 @@ import { RoleEnum, SameBalancePlayers, TeamRoles } from '@/app/main.types'
 
 const ROLES = Object.values(RoleEnum)
 
-export default function MainPage() {
+export default function RandomLineMatchingPage() {
   const [pairs, setPairs] = useState<SameBalancePlayers[]>(Array(5).fill(0).map(() => ({ player1: '', player2: '' })))
   const [isMatched, setIsMatched] = useState(false)
   const [teamRoles, setTeamRoles] = useState<TeamRoles>({
