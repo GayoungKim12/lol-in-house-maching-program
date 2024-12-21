@@ -25,7 +25,7 @@ export default function useMatchTeam() {
     }
   }
 
-  const matchTeams = () => {
+  const matchTeams = (type: 'fixed' | 'random') => {
     const isAllFilled = pairs.every(pair => pair.player1.trim() !== '' && pair.player2.trim() !== '')
 
     if (!isAllFilled) {
@@ -46,11 +46,15 @@ export default function useMatchTeam() {
       }
     })
 
-    setTeamRoles(assignInitialRoles(team1, team2))
+    if (type === 'random') {
+      changeLines(assignInitialRoles(team1, team2))
+    } else {
+      setTeamRoles(assignInitialRoles(team1, team2))
+    }
     setIsMatched(true)
   }
 
-  const changeLines = () => {
+  const changeLines = (teamRoles: TeamRoles) => {
     // 각 팀의 플레이어를 무작위로 섞기
     const shuffleArray = (array: string[]) => {
       const shuffled = [...array]
