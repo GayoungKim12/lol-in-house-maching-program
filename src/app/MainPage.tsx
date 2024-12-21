@@ -8,217 +8,159 @@ import { RoleEnum, SameBalancePlayers, TeamRoles } from '@/app/main.types'
 const ROLES = Object.values(RoleEnum)
 
 export default function MainPage() {
-    const [pairs, setPairs] = useState<SameBalancePlayers[]>(Array(5).fill(0).map(() => ({ player1: '', player2: '' })));
-    const [isMatched, setIsMatched] = useState(false);
-    const [teamRoles, setTeamRoles] = useState<TeamRoles>({
-        team1: [],
-        team2: []
-    });
+  const [pairs, setPairs] = useState<SameBalancePlayers[]>(Array(5).fill(0).map(() => ({ player1: '', player2: '' })))
+  const [isMatched, setIsMatched] = useState(false)
+  const [teamRoles, setTeamRoles] = useState<TeamRoles>({
+    team1: [], team2: [],
+  })
 
-    const handlePlayerChange = (pairIndex: number, player: 'player1' | 'player2', value: string) => {
-        const newPairs = [...pairs];
-        newPairs[pairIndex][player] = value;
-        setPairs(newPairs);
-    };
+  const handlePlayerChange = (pairIndex: number, player: 'player1' | 'player2', value: string) => {
+    const newPairs = [...pairs]
+    newPairs[pairIndex][player] = value
+    setPairs(newPairs)
+  }
 
-    const assignInitialRoles = (team1Players: string[], team2Players: string[]) => {
-        return {
-            team1: team1Players.map((player: string, idx: number) => ({
-                player,
-                role: ROLES[idx]
-            })),
-            team2: team2Players.map((player: string, idx: number) => ({
-                player,
-                role: ROLES[idx]
-            }))
-        };
-    };
+  const assignInitialRoles = (team1Players: string[], team2Players: string[]) => {
+    return {
+      team1: team1Players.map((player: string, idx: number) => ({
+        player, role: ROLES[idx],
+      })), team2: team2Players.map((player: string, idx: number) => ({
+        player, role: ROLES[idx],
+      })),
+    }
+  }
 
-    const matchTeams = () => {
-        const isAllFilled = pairs.every(pair =>
-            pair.player1.trim() !== '' && pair.player2.trim() !== ''
-        );
+  const matchTeams = () => {
+    const isAllFilled = pairs.every(pair => pair.player1.trim() !== '' && pair.player2.trim() !== '')
 
-        if (!isAllFilled) {
-            alert('모든 맞밸 플레이어를 입력해주세요!');
-            return;
-        }
+    if (!isAllFilled) {
+      alert('모든 맞밸 플레이어를 입력해주세요!')
+      return
+    }
 
-        const team1: string[] = [];
-        const team2: string[] = [];
+    const team1: string[] = []
+    const team2: string[] = []
 
-        pairs.forEach(pair => {
-            if (Math.random() < 0.5) {
-                team1.push(pair.player1);
-                team2.push(pair.player2);
-            } else {
-                team1.push(pair.player2);
-                team2.push(pair.player1);
-            }
-        });
+    pairs.forEach(pair => {
+      if (Math.random() < 0.5) {
+        team1.push(pair.player1)
+        team2.push(pair.player2)
+      } else {
+        team1.push(pair.player2)
+        team2.push(pair.player1)
+      }
+    })
 
-        setTeamRoles(assignInitialRoles(team1, team2));
-        setIsMatched(true);
-    };
+    setTeamRoles(assignInitialRoles(team1, team2))
+    setIsMatched(true)
+  }
 
-    const resetLines = () => {
-        // 각 팀의 플레이어를 무작위로 섞기
-        const shuffleArray = (array: string[]) => {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        };
+  const resetLines = () => {
+    // 각 팀의 플레이어를 무작위로 섞기
+    const shuffleArray = (array: string[]) => {
+      const shuffled = [...array]
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+      }
+      return shuffled
+    }
 
-        // 각 팀의 현재 플레이어들을 가져와서 섞기
-        const shuffledTeam1Players = shuffleArray(teamRoles.team1.map(p => p.player));
-        const shuffledTeam2Players = shuffleArray(teamRoles.team2.map(p => p.player));
+    // 각 팀의 현재 플레이어들을 가져와서 섞기
+    const shuffledTeam1Players = shuffleArray(teamRoles.team1.map(p => p.player))
+    const shuffledTeam2Players = shuffleArray(teamRoles.team2.map(p => p.player))
 
-        // 섞인 플레이어들에게 라인 할당
-        const newTeamRoles = {
-            team1: shuffledTeam1Players.map((player, idx) => ({
-                player,
-                role: ROLES[idx]
-            })),
-            team2: shuffledTeam2Players.map((player, idx) => ({
-                player,
-                role: ROLES[idx]
-            }))
-        };
+    // 섞인 플레이어들에게 라인 할당
+    const newTeamRoles = {
+      team1: shuffledTeam1Players.map((player, idx) => ({
+        player, role: ROLES[idx],
+      })), team2: shuffledTeam2Players.map((player, idx) => ({
+        player, role: ROLES[idx],
+      })),
+    }
 
-        setTeamRoles(newTeamRoles);
-    };
+    setTeamRoles(newTeamRoles)
+  }
 
-    const resetAll = () => {
-        setPairs(Array(5).fill(0).map(() => ({ player1: '', player2: '' })));
-        setTeamRoles({ team1: [], team2: [] });
-        setIsMatched(false);
-    };
+  const resetAll = () => {
+    setPairs(Array(5).fill(0).map(() => ({ player1: '', player2: '' })))
+    setTeamRoles({ team1: [], team2: [] })
+    setIsMatched(false)
+  }
 
-    const swapRoles = (team: Teams, index1: number, index2: number) => {
-        const newTeamRoles = {
-            ...teamRoles,
-            [team]: [...teamRoles[team]]
-        };
+  return (<Card className="w-full max-w-2xl mx-auto">
+    <CardHeader>
+      <CardTitle className="text-center">롤 내전 맞밸 팀 매칭</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="space-y-6">
+        {!isMatched ? (<div className="space-y-4">
+          {pairs.map((pair, index) => (<div key={index} className="grid grid-cols-2 gap-4">
+            <div className="flex items-center gap-2">
+              <span className="w-6">#{index + 1}</span>
+              <Input
+                value={pair.player1}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => handlePlayerChange(index, 'player1', e.target.value)}
+                placeholder="플레이어 1"
+                className="flex-1"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-6">VS</span>
+              <Input
+                value={pair.player2}
+                onChange={(e) => handlePlayerChange(index, 'player2', e.target.value)}
+                placeholder="플레이어 2"
+                className="flex-1"
+              />
+            </div>
+          </div>))}
+        </div>) : (<div className="grid grid-cols-2 gap-8">
+          <div className="space-y-2">
+            <h3 className="text-lg font-bold text-blue-600">블루팀</h3>
+            {teamRoles.team1.map((player, index) => (<div key={index} className="relative">
+              <div className="p-2 bg-blue-100 rounded flex justify-between items-center">
+                <span className="font-medium w-12">{player.role}</span>
+                <span>{player.player}</span>
+              </div>
+            </div>))}
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-lg font-bold text-red-600">레드팀</h3>
+            {teamRoles.team2.map((player, index) => (<div key={index} className="relative">
+              <div className="p-2 bg-red-100 rounded flex justify-between items-center">
+                <span className="font-medium w-12">{player.role}</span>
+                <span>{player.player}</span>
+              </div>
+            </div>))}
+          </div>
+        </div>)}
 
-        const randomIndex = Math.floor(Math.random() * 5); // 0~4 중 랜덤 인덱스
-
-        console.log(randomIndex)
-
-        const temp = newTeamRoles[team][index1].role;
-        newTeamRoles[team][index1].role = newTeamRoles[team][randomIndex].role;
-        newTeamRoles[team][randomIndex].role = temp;
-
-        setTeamRoles(newTeamRoles);
-    };
-
-    const renderSwapButton = (team: Teams, currentIndex: number) => {
-        const nextIndex = (currentIndex + 1) % 5;
-        return (
+        <div className="flex justify-center gap-4">
+          {!isMatched ? (<Button
+            onClick={matchTeams}
+            className="w-40"
+          >
+            <Shuffle className="mr-2 h-4 w-4" />
+            팀 매칭하기
+          </Button>) : (<div className="flex gap-4">
             <Button
-                variant="ghost"
-                size="sm"
-                className="p-1 h-6 absolute -right-7"
-                onClick={() => swapRoles(team, currentIndex, nextIndex)}
+              onClick={resetLines}
+              variant="outline"
+              className="w-40"
             >
-                <ArrowUpDown className="h-4 w-4" />
+              라인 리셋
             </Button>
-        );
-    };
-
-    return (
-        <Card className="w-full max-w-2xl mx-auto">
-            <CardHeader>
-                <CardTitle className="text-center">롤 내전 맞밸 팀 매칭</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className="space-y-6">
-                    {!isMatched ? (
-                        <div className="space-y-4">
-                            {pairs.map((pair, index) => (
-                                <div key={index} className="grid grid-cols-2 gap-4">
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-6">#{index + 1}</span>
-                                        <Input
-                                            value={pair.player1}
-                                            onChange={(e: ChangeEvent<HTMLInputElement>) => handlePlayerChange(index, 'player1', e.target.value)}
-                                            placeholder="플레이어 1"
-                                            className="flex-1"
-                                        />
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span className="w-6">VS</span>
-                                        <Input
-                                            value={pair.player2}
-                                            onChange={(e) => handlePlayerChange(index, 'player2', e.target.value)}
-                                            placeholder="플레이어 2"
-                                            className="flex-1"
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-2 gap-8">
-                            <div className="space-y-2">
-                                <h3 className="text-lg font-bold text-blue-600">블루팀</h3>
-                                {teamRoles.team1.map((player, index) => (
-                                    <div key={index} className="relative">
-                                        <div className="p-2 bg-blue-100 rounded flex justify-between items-center">
-                                            <span className="font-medium w-12">{player.role}</span>
-                                            <span>{player.player}</span>
-                                        </div>
-                                        {renderSwapButton('team1', index)}
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="space-y-2">
-                                <h3 className="text-lg font-bold text-red-600">레드팀</h3>
-                                {teamRoles.team2.map((player, index) => (
-                                    <div key={index} className="relative">
-                                        <div className="p-2 bg-red-100 rounded flex justify-between items-center">
-                                            <span className="font-medium w-12">{player.role}</span>
-                                            <span>{player.player}</span>
-                                        </div>
-                                        {renderSwapButton('team2', index)}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    <div className="flex justify-center gap-4">
-                        {!isMatched ? (
-                            <Button
-                                onClick={matchTeams}
-                                className="w-40"
-                            >
-                                <Shuffle className="mr-2 h-4 w-4" />
-                                팀 매칭하기
-                            </Button>
-                        ) : (
-                            <div className="flex gap-4">
-                                <Button
-                                    onClick={resetLines}
-                                    variant="outline"
-                                    className="w-40"
-                                >
-                                    라인 리셋
-                                </Button>
-                                <Button
-                                    onClick={resetAll}
-                                    variant="ghost"
-                                    className="w-40"
-                                >
-                                    처음부터
-                                </Button>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
-    );
+            <Button
+              onClick={resetAll}
+              variant="ghost"
+              className="w-40"
+            >
+              처음부터
+            </Button>
+          </div>)}
+        </div>
+      </div>
+    </CardContent>
+  </Card>)
 }
