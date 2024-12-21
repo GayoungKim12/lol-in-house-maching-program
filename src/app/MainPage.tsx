@@ -1,9 +1,9 @@
-import {ChangeEvent, useState} from "react";
-import {Input} from "@/components/ui/input";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Button} from "@/components/ui/button";
-import {ArrowUpDown, Shuffle} from "lucide-react";
-import {RoleEnum, SameBalancePlayers, TeamRoles, Teams} from "@/app/main.types";
+import { ChangeEvent, useState } from 'react'
+import { Input } from '@/shared/components/ui/input'
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import { Button } from '@/shared/components/ui/button'
+import { Shuffle } from 'lucide-react'
+import { RoleEnum, SameBalancePlayers, TeamRoles } from '@/app/main.types'
 
 const ROLES = Object.values(RoleEnum)
 
