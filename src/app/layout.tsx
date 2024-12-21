@@ -1,15 +1,18 @@
 import { Outlet } from 'react-router-dom'
-import { SidebarProvider, SidebarTrigger } from '@/shared/components/ui/sidebar'
+import { SidebarProvider } from '@/shared/components/ui/sidebar'
 import AppSidebar from '@/widgets/sidebar/ui/AppSidebar'
+import Header from '@/widgets/header/ui/Header'
 
 export default function Layout() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className="w-full">
-        <SidebarTrigger />
-        <Outlet />
-      </main>
+      <div className="w-full">
+        <Header />
+        <main className="w-full h-full">
+          <Outlet />
+        </main>
+      </div>
     </SidebarProvider>
   )
 }
