@@ -16,7 +16,7 @@ export interface TeamRoles {
   team2: User[];
 }
 
-export interface SameBalancePlayers {
+export interface Pair {
   player1: string;
   player2: string;
 }
