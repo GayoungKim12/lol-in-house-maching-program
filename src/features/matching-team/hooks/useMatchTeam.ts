@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { RoleEnum, SameBalancePlayers, TeamRoles } from '@/shared/types/teamRole'
+import { RoleEnum, TeamRoles } from '@/shared/types/teamRole'
+import usePlayersStore from '@/features/matching-team/stores/usePlayersStore'
 
 export default function useMatchTeam() {
   const ROLES = Object.values(RoleEnum)
-  const [pairs, setPairs] = useState<SameBalancePlayers[]>(Array(5).fill(0).map(() => ({ player1: '', player2: '' })))
+  const { pairs, setPairs } = usePlayersStore()
   const [isMatched, setIsMatched] = useState(false)
   const [teamRoles, setTeamRoles] = useState<TeamRoles>({
     team1: [], team2: [],
@@ -82,7 +83,6 @@ export default function useMatchTeam() {
   }
 
   const resetAll = () => {
-    setPairs(Array(5).fill(0).map(() => ({ player1: '', player2: '' })))
     setTeamRoles({ team1: [], team2: [] })
     setIsMatched(false)
   }
