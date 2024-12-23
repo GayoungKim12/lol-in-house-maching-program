@@ -7,10 +7,10 @@ interface PlayersStore {
   setPairs: (pairs: Pair[]) => void
 }
 
-const usePlayersStore = create<PlayersStore>((set) => ({
+const usePairsStore = create<PlayersStore>((set) => ({
   pairs: Array(5).fill(0).map(() => ({ player1: '', player2: '' })),
 
   setPairs: (pairs: Pair[]) => set({ pairs }),
 }))
 
-export default usePlayersStore
+export default usePairsStore

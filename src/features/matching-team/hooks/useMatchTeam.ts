@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { RoleEnum, TeamRoles } from '@/shared/types/teamRole'
-import usePlayersStore from '@/features/matching-team/stores/usePlayersStore'
+import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 
 export default function useMatchTeam() {
   const ROLES = Object.values(RoleEnum)
-  const { pairs, setPairs } = usePlayersStore()
+  const { pairs, setPairs } = usePairsStore()
   const [isMatched, setIsMatched] = useState(false)
   const [teamRoles, setTeamRoles] = useState<TeamRoles>({
     team1: [], team2: [],
