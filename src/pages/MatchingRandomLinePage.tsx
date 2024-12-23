@@ -3,6 +3,7 @@ import { Button } from '@/shared/components/ui/button'
 import { Shuffle } from 'lucide-react'
 import useMatchTeam from '@/features/matching-team/hooks/useMatchTeam'
 import MatchBoard from '@/features/matching-team/ui/MatchBoard'
+import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 
 export default function MatchingRandomLinePage() {
   const { pairs, isMatched, teamRoles, handlePlayerChange, matchTeams, changeLines, resetAll } = useMatchTeam()
@@ -14,29 +15,11 @@ export default function MatchingRandomLinePage() {
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
+          
           {!isMatched ? (
             <MatchBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
           ) : (
-            <div className="grid grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-blue-600">Blue</h3>
-                {teamRoles.team1.map((player, index) => (<div key={index} className="relative">
-                  <div className="p-2 bg-blue-100 rounded flex justify-between items-center">
-                    <span className="font-medium w-12">{player.role}</span>
-                    <span>{player.player}</span>
-                  </div>
-                </div>))}
-              </div>
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-red-600">Red</h3>
-                {teamRoles.team2.map((player, index) => (<div key={index} className="relative">
-                  <div className="p-2 bg-red-100 rounded flex justify-between items-center">
-                    <span className="font-medium w-12">{player.role}</span>
-                    <span>{player.player}</span>
-                  </div>
-                </div>))}
-              </div>
-            </div>
+            <TeamLineup teamRoles={teamRoles} />
           )}
 
           <div className="flex justify-center gap-4">
