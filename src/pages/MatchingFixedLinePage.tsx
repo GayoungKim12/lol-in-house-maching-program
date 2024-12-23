@@ -1,12 +1,8 @@
-import { ChangeEvent } from 'react'
-import { Input } from '@/shared/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Button } from '@/shared/components/ui/button'
 import { Shuffle } from 'lucide-react'
-import { RoleEnum } from '@/shared/types/teamRole'
 import useMatchTeam from '@/features/matching-team/hooks/useMatchTeam'
-
-const ROLES = Object.values(RoleEnum)
+import MatchBoard from '@/features/matching-team/ui/MatchBoard'
 
 export default function MatchingFixedLinePage() {
   const { pairs, isMatched, teamRoles, handlePlayerChange, matchTeams, resetAll } = useMatchTeam()
@@ -18,29 +14,8 @@ export default function MatchingFixedLinePage() {
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
-          {!isMatched ? (<div className="space-y-4">
-              {pairs.map((pair, index) => (
-                <div key={index} className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="w-12">{ROLES[index]}</span>
-                    <Input
-                      value={pair.player1}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) => handlePlayerChange(index, 'player1', e.target.value)}
-                      placeholder="플레이어 1"
-                      className="flex-1"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-6">VS</span>
-                    <Input
-                      value={pair.player2}
-                      onChange={(e) => handlePlayerChange(index, 'player2', e.target.value)}
-                      placeholder="플레이어 2"
-                      className="flex-1"
-                    />
-                  </div>
-                </div>))}
-            </div>
+          {!isMatched ? (
+            <MatchBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
           ) : (
             <div className="grid grid-cols-2 gap-8">
               <div className="space-y-2">
