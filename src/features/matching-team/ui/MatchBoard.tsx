@@ -7,8 +7,6 @@ interface MatchBoardProps {
   handlePlayerChange: (pairIndex: number, player: 'player1' | 'player2', value: string) => void
 }
 
-const ROLES = Object.values(RoleEnum)
-
 export default function MatchBoard({ pairs, handlePlayerChange }: MatchBoardProps) {
   return (
     <div className="flex flex-col items-center space-y-4">
@@ -19,7 +17,7 @@ export default function MatchBoard({ pairs, handlePlayerChange }: MatchBoardProp
             <Input
               value={pair.player1}
               onChange={(e: ChangeEvent<HTMLInputElement>) => handlePlayerChange(index, 'player1', e.target.value)}
-              placeholder={`${ROLES[index]} 1`}
+              placeholder={`${RoleEnum[index]}1`}
               className="flex-1"
             />
           </div>
@@ -28,7 +26,7 @@ export default function MatchBoard({ pairs, handlePlayerChange }: MatchBoardProp
             <Input
               value={pair.player2}
               onChange={(e) => handlePlayerChange(index, 'player2', e.target.value)}
-              placeholder={`${ROLES[index]} 2`}
+              placeholder={`${RoleEnum[index]}2`}
               className="flex-1"
             />
           </div>
