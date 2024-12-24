@@ -43,11 +43,13 @@ export default function useMatchTeam() {
       }
     })
 
+    let initialTeamLineUps = assignInitialRoles(blueTeam, redTeam)
+
     if (type === 'random') {
-      changeLines(assignInitialRoles(team1, team2))
-    } else {
-      setTeamRoles(assignInitialRoles(team1, team2))
+      initialTeamLineUps = changeLines(initialTeamLineUps)
     }
+
+    setTeamLineUps(initialTeamLineUps)
     setIsMatched(true)
   }
 
@@ -71,8 +73,6 @@ export default function useMatchTeam() {
       [TeamEnum.BLUE]: shuffledBlueTeamPlayers.map((player, idx) => ({ player, role: idx })),
       [TeamEnum.RED]: shuffledRedTeamPlayers.map((player, idx) => ({ player, role: idx })),
     }
-
-    setTeamRoles(newTeamRoles)
   }
 
   const resetAll = () => {
