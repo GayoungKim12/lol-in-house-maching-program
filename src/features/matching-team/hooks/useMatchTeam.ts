@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
+import { Pair, TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 import changeLines from '@/features/matching-team/utils/changeLines'
 
@@ -23,14 +23,7 @@ export default function useMatchTeam() {
     }
   }
 
-  const matchTeams = (type: 'fixed' | 'random') => {
-    const isAllFilled = pairs.every(pair => pair.player1.trim() !== '' && pair.player2.trim() !== '')
-
-    if (!isAllFilled) {
-      alert('모든 맞밸 플레이어를 입력해주세요!')
-      return
-    }
-
+  const matchTeam = (pairs: Pair[]) => {
     const blueTeam: string[] = []
     const redTeam: string[] = []
 
@@ -44,13 +37,20 @@ export default function useMatchTeam() {
       }
     })
 
-    let initialTeamLineUps = assignInitialRoles(blueTeam, redTeam)
+    return { blueTeam, redTeam }
+  }
 
-    if (type === 'random') {
-      initialTeamLineUps = changeLines(initialTeamLineUps)
+  const matchTeamLineUps = () => {
+    const isAllFilled = pairs.every(pair => pair.player1.trim() !== '' && pair.player2.trim() !== '')
+
+    if (!isAllFilled) {
+      alert('모든 맞밸 플레이어를 입력해주세요!')
+      return
     }
 
-    setTeamLineUps(initialTeamLineUps)
+    const { blueTeam, redTeam } = matchTeam(pairs)
+
+    setTeamLineUps(changeLines(assignInitialRoles(blueTeam, redTeam)))
     setIsMatched(true)
   }
 
@@ -59,5 +59,5 @@ export default function useMatchTeam() {
     setIsMatched(false)
   }
 
-  return { pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeams, changeLines, resetAll }
+  return { pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeamLineUps, changeLines, resetAll }
 }

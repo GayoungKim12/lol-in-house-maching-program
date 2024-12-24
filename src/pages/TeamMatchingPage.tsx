@@ -7,7 +7,7 @@ import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
 
 export default function TeamMatchingPage() {
   const {
-    pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeams, changeLines, resetAll,
+    pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeamLineUps, changeLines, resetAll,
   } = useMatchTeam()
 
   return (
@@ -17,7 +17,7 @@ export default function TeamMatchingPage() {
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
-          
+
           {!isMatched ? (
             <MatchBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
           ) : (
@@ -26,7 +26,7 @@ export default function TeamMatchingPage() {
 
           <div className="flex justify-center gap-4">
             {!isMatched ? (
-              <MatchTeamButton onClick={() => matchTeams('random')} />
+              <MatchTeamButton onClick={() => matchTeamLineUps()} />
             ) : (
               <div className="flex gap-4">
                 <Button onClick={() => setTeamLineUps(changeLines(teamLineUps))} variant="outline" className="w-40"
