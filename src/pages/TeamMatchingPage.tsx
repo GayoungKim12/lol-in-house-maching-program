@@ -30,12 +30,10 @@ export default function TeamMatchingPage() {
               <MatchTeamButton onClick={() => matchTeamLineUps()} />
             ) : (
               <div className="flex gap-4">
-                <Button onClick={() => setTeamLineUps(changeLineUps(teamLineUps))} variant="outline" className="w-40"
-                >
+                <Button onClick={() => setTeamLineUps(changeLineUps(teamLineUps))} variant="outline" className="w-40">
                   라인 바꾸기
                 </Button>
-                <Button onClick={resetAll} variant="ghost" className="w-40"
-                >
+                <Button onClick={resetAll} variant="ghost" className="w-40">
                   처음부터
                 </Button>
               </div>
