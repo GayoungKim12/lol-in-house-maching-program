@@ -5,7 +5,7 @@ import changeLineUps from '@/features/matching-team/utils/changeLineUps'
 import matchTeams from '@/features/matching-team/utils/matchTeams'
 import matchInitialLineUps from '@/features/matching-team/utils/matchInitialLineUps'
 
-export default function useMatchTeam() {
+export default function useMatchTeamLineUps() {
   const { pairs, setPairs } = usePairsStore()
   const [isMatched, setIsMatched] = useState(false)
   const [teamLineUps, setTeamLineUps] = useState<TeamLineUps>({

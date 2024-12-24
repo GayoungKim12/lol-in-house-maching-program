@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Button } from '@/shared/components/ui/button'
-import useMatchTeam from '@/features/matching-team/hooks/useMatchTeam'
+import useMatchTeamLineUps from '@/features/matching-team/hooks/useMatchTeamLineUps'
 import MatchBoard from '@/features/matching-team/ui/MatchBoard'
 import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
@@ -9,7 +9,7 @@ import changeLineUps from '@/features/matching-team/utils/changeLineUps'
 export default function TeamMatchingPage() {
   const {
     pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeamLineUps, resetAll,
-  } = useMatchTeam()
+  } = useMatchTeamLineUps()
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
