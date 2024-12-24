@@ -1,6 +1,6 @@
 import { TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 
-export default function changeLines(teamLineUps: TeamLineUps) {
+export default function changeLineUps(teamLineUps: TeamLineUps) {
   // 각 팀의 플레이어를 무작위로 섞기
   const shuffleArray = (array: string[]) => {
     const shuffled = [...array]

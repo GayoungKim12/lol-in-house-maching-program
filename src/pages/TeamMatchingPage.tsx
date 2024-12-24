@@ -4,10 +4,11 @@ import useMatchTeam from '@/features/matching-team/hooks/useMatchTeam'
 import MatchBoard from '@/features/matching-team/ui/MatchBoard'
 import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
+import changeLineUps from '@/features/matching-team/utils/changeLineUps'
 
 export default function TeamMatchingPage() {
   const {
-    pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeamLineUps, changeLines, resetAll,
+    pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeamLineUps, resetAll,
   } = useMatchTeam()
 
   return (
@@ -29,7 +30,7 @@ export default function TeamMatchingPage() {
               <MatchTeamButton onClick={() => matchTeamLineUps()} />
             ) : (
               <div className="flex gap-4">
-                <Button onClick={() => setTeamLineUps(changeLines(teamLineUps))} variant="outline" className="w-40"
+                <Button onClick={() => setTeamLineUps(changeLineUps(teamLineUps))} variant="outline" className="w-40"
                 >
                   라인 바꾸기
                 </Button>

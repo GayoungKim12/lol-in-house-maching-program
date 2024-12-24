@@ -1,6 +1,6 @@
 import { Pair } from '@/shared/types/teamRole'
 
-export default function matchTeam(pairs: Pair[]) {
+export default function matchTeams(pairs: Pair[]) {
   const blueTeam: string[] = []
   const redTeam: string[] = []
 
