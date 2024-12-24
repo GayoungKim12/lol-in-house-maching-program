@@ -15,7 +15,7 @@ export default function useMatchTeam() {
     setPairs(newPairs)
   }
 
-  const assignInitialRoles = (team1Players: string[], team2Players: string[]) => {
+  const assignInitialRoles = (blueTeamPlayers: string[], redTeamPlayers: string[]) => {
     return {
       [TeamEnum.BLUE]: blueTeamPlayers.map((player: string, idx: number) => ({ player, role: idx })),
       [TeamEnum.RED]: redTeamPlayers.map((player: string, idx: number) => ({ player, role: idx })),
@@ -30,16 +30,16 @@ export default function useMatchTeam() {
       return
     }
 
-    const team1: string[] = []
-    const team2: string[] = []
+    const blueTeam: string[] = []
+    const redTeam: string[] = []
 
     pairs.forEach(pair => {
       if (Math.random() < 0.5) {
-        team1.push(pair.player1)
-        team2.push(pair.player2)
+        blueTeam.push(pair.player1)
+        redTeam.push(pair.player2)
       } else {
-        team1.push(pair.player2)
-        team2.push(pair.player1)
+        blueTeam.push(pair.player2)
+        redTeam.push(pair.player1)
       }
     })
 
@@ -80,5 +80,5 @@ export default function useMatchTeam() {
     setIsMatched(false)
   }
 
-  return { pairs, isMatched, teamRoles, handlePlayerChange, matchTeams, changeLines, resetAll }
+  return { pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeams, changeLines, resetAll }
 }

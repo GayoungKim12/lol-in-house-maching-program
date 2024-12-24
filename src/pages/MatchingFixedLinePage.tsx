@@ -6,7 +6,7 @@ import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
 
 export default function MatchingFixedLinePage() {
-  const { pairs, isMatched, teamRoles, handlePlayerChange, matchTeams, resetAll } = useMatchTeam()
+  const { pairs, isMatched, teamLineUps, handlePlayerChange, matchTeams, resetAll } = useMatchTeam()
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
@@ -18,7 +18,7 @@ export default function MatchingFixedLinePage() {
           {!isMatched ? (
             <MatchBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
           ) : (
-            <TeamLineup teamRoles={teamRoles} />
+            <TeamLineup teamLineUps={teamLineUps} />
           )}
 
           <div className="flex justify-center gap-4">

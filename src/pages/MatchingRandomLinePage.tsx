@@ -6,7 +6,9 @@ import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
 
 export default function MatchingRandomLinePage() {
-  const { pairs, isMatched, teamRoles, handlePlayerChange, matchTeams, changeLines, resetAll } = useMatchTeam()
+  const {
+    pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeams, changeLines, resetAll,
+  } = useMatchTeam()
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
@@ -19,7 +21,7 @@ export default function MatchingRandomLinePage() {
           {!isMatched ? (
             <MatchBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
           ) : (
-            <TeamLineup teamRoles={teamRoles} />
+            <TeamLineup teamLineUps={teamLineUps} />
           )}
 
           <div className="flex justify-center gap-4">
@@ -27,7 +29,7 @@ export default function MatchingRandomLinePage() {
               <MatchTeamButton onClick={() => matchTeams('random')} />
             ) : (
               <div className="flex gap-4">
-                <Button onClick={() => changeLines(teamRoles)} variant="outline" className="w-40"
+                <Button onClick={() => setTeamLineUps(changeLines(teamLineUps))} variant="outline" className="w-40"
                 >
                   라인 바꾸기
                 </Button>
