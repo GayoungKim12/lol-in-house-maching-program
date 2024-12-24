@@ -2,15 +2,11 @@ import { Sidebar } from '@/widgets/sidebar/types/menuItems.types'
 
 export const menuItems: Sidebar[] = [
   {
-    subheading: 'MATCHING',
+    subheading: 'LoL',
     menuItems: [{
       icon: 'Shuffle',
-      label: 'Random',
-      to: '/matching/random-line',
-    }, {
-      icon: 'Pin',
-      label: 'Fixed',
-      to: '/matching/fixed-line',
+      label: 'Matching Team',
+      to: '/matching-team',
     }],
 
   },
