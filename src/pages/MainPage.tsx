@@ -11,11 +11,11 @@ export default function MainPage() {
         </div>
       </div>
       <div className="flex justify-center items-center gap-3">
-        <Button variant="outline" asChild>
-          <Link to={'/matching/random-line'}>라인 랜덤</Link>
-        </Button>
-        <Button variant="outline" asChild>
-          <Link to={'/matching/fixed-line'}>라인 고정</Link>
+        <Button size="lg" asChild>
+          <Link to={'/matching-team'}>
+            GET STARTED
+            <Icon name="ChevronRight" />
+          </Link>
         </Button>
       </div>
     </div>
