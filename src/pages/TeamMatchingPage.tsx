@@ -4,18 +4,33 @@ import useMatchTeamLineUps from '@/features/matching-team/hooks/useMatchTeamLine
 import MatchBoard from '@/features/matching-team/ui/MatchBoard'
 import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
+import { Icon } from '@/shared/components/icon'
+import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 
 export default function TeamMatchingPage() {
+  const { fixedLines, setFixedLines } = useFixedLinesStore()
   const {
     pairs, isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll,
   } = useMatchTeamLineUps()
 
+  const isAllFixedLines = fixedLines.length === 5
+
+  const handleChangeFixedLines = () => {
+    setFixedLines(isAllFixedLines ? [] : [0, 1, 2, 3, 4])
+  }
+
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
+    <Card className="flex flex-col w-full max-w-2xl mx-auto p-6 gap-6">
+      <CardHeader className="flex-row items-center justify-between p-0">
+        <span className="w-10"></span>
         <CardTitle className="text-center">팀 매칭</CardTitle>
+        <Button variant="icon" size="icon" onClick={handleChangeFixedLines} className="margin-0">
+          {isAllFixedLines ?
+            <Icon name="Pin" size={22} strokeWidth={'1.5'} className="text-slate-800" /> :
+            <Icon name="PinOff" size={22} strokeWidth={'1.5'} className="text-slate-400" />}
+        </Button>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-0 w-full">
         <div className="space-y-6">
 
           {!isMatched ? (
