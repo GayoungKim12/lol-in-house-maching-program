@@ -1,6 +1,6 @@
-import { TeamRoles } from '@/shared/types/teamRole'
+import { RoleEnum, TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 
-export default function TeamLineup({ teamRoles }: { teamRoles: TeamRoles }) {
+export default function TeamLineup({ teamLineUps }: { teamLineUps: TeamLineUps }) {
   return (
     <div className="grid grid-cols-2 gap-8">
       <div className="space-y-2">

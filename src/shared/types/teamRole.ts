@@ -1,9 +1,14 @@
 export enum RoleEnum {
-  Top = '탑',
-  Jungle = '정글',
-  Mid = '미드',
-  ADCarry = '원딜',
-  Support = '서폿'
+  '탑',
+  '정글',
+  '미드',
+  '원딜',
+  '서폿'
+}
+
+export enum TeamEnum {
+  BLUE = 'blue',
+  RED = 'red'
 }
 
 export interface User {
@@ -11,10 +16,9 @@ export interface User {
   role: RoleEnum;
 }
 
-export interface TeamRoles {
-  team1: User[];
-  team2: User[];
-}
+export type TeamLineUps = {
+  [key in TeamEnum]: User[];
+};
 
 export interface Pair {
   player1: string;

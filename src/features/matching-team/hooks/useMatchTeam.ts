@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { RoleEnum, TeamRoles } from '@/shared/types/teamRole'
+import { TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 
 export default function useMatchTeam() {
-  const ROLES = Object.values(RoleEnum)
   const { pairs, setPairs } = usePairsStore()
   const [isMatched, setIsMatched] = useState(false)
-  const [teamRoles, setTeamRoles] = useState<TeamRoles>({
-    team1: [], team2: [],
+  const [teamLineUps, setTeamLineUps] = useState<TeamLineUps>({
+    [TeamEnum.BLUE]: [], [TeamEnum.RED]: [],
   })
 
   const handlePlayerChange = (pairIndex: number, player: 'player1' | 'player2', value: string) => {
@@ -18,11 +17,8 @@ export default function useMatchTeam() {
 
   const assignInitialRoles = (team1Players: string[], team2Players: string[]) => {
     return {
-      team1: team1Players.map((player: string, idx: number) => ({
-        player, role: ROLES[idx],
-      })), team2: team2Players.map((player: string, idx: number) => ({
-        player, role: ROLES[idx],
-      })),
+      [TeamEnum.BLUE]: blueTeamPlayers.map((player: string, idx: number) => ({ player, role: idx })),
+      [TeamEnum.RED]: redTeamPlayers.map((player: string, idx: number) => ({ player, role: idx })),
     }
   }
 
@@ -55,7 +51,7 @@ export default function useMatchTeam() {
     setIsMatched(true)
   }
 
-  const changeLines = (teamRoles: TeamRoles) => {
+  const changeLines = (teamLineUps: TeamLineUps) => {
     // 각 팀의 플레이어를 무작위로 섞기
     const shuffleArray = (array: string[]) => {
       const shuffled = [...array]
@@ -67,23 +63,20 @@ export default function useMatchTeam() {
     }
 
     // 각 팀의 현재 플레이어들을 가져와서 섞기
-    const shuffledTeam1Players = shuffleArray(teamRoles.team1.map(p => p.player))
-    const shuffledTeam2Players = shuffleArray(teamRoles.team2.map(p => p.player))
+    const shuffledBlueTeamPlayers = shuffleArray(teamLineUps[TeamEnum.BLUE].map(p => p.player))
+    const shuffledRedTeamPlayers = shuffleArray(teamLineUps[TeamEnum.RED].map(p => p.player))
 
     // 섞인 플레이어들에게 라인 할당
-    const newTeamRoles = {
-      team1: shuffledTeam1Players.map((player, idx) => ({
-        player, role: ROLES[idx],
-      })), team2: shuffledTeam2Players.map((player, idx) => ({
-        player, role: ROLES[idx],
-      })),
+    return {
+      [TeamEnum.BLUE]: shuffledBlueTeamPlayers.map((player, idx) => ({ player, role: idx })),
+      [TeamEnum.RED]: shuffledRedTeamPlayers.map((player, idx) => ({ player, role: idx })),
     }
 
     setTeamRoles(newTeamRoles)
   }
 
   const resetAll = () => {
-    setTeamRoles({ team1: [], team2: [] })
+    setTeamLineUps({ [TeamEnum.BLUE]: [], [TeamEnum.RED]: [] })
     setIsMatched(false)
   }
 
