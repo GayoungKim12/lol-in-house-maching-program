@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import { Pair, TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
+import { TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 import changeLines from '@/features/matching-team/utils/changeLines'
+import matchTeam from '@/features/matching-team/utils/matchTeam'
+import assignInitialRoles from '@/features/matching-team/utils/assignInitialRoles'
 
 export default function useMatchTeam() {
   const { pairs, setPairs } = usePairsStore()
@@ -14,30 +16,6 @@ export default function useMatchTeam() {
     const newPairs = [...pairs]
     newPairs[pairIndex][player] = value
     setPairs(newPairs)
-  }
-
-  const assignInitialRoles = (blueTeamPlayers: string[], redTeamPlayers: string[]) => {
-    return {
-      [TeamEnum.BLUE]: blueTeamPlayers.map((player: string, idx: number) => ({ player, role: idx })),
-      [TeamEnum.RED]: redTeamPlayers.map((player: string, idx: number) => ({ player, role: idx })),
-    }
-  }
-
-  const matchTeam = (pairs: Pair[]) => {
-    const blueTeam: string[] = []
-    const redTeam: string[] = []
-
-    pairs.forEach(pair => {
-      if (Math.random() < 0.5) {
-        blueTeam.push(pair.player1)
-        redTeam.push(pair.player2)
-      } else {
-        blueTeam.push(pair.player2)
-        redTeam.push(pair.player1)
-      }
-    })
-
-    return { blueTeam, redTeam }
   }
 
   const matchTeamLineUps = () => {
