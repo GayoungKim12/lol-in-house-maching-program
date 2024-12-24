@@ -1,7 +1,6 @@
-import { TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
+import { RoleEnum, TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 
-export default function changeLineUps(teamLineUps: TeamLineUps) {
-  // 각 팀의 플레이어를 무작위로 섞기
+export default function changeLineUps(teamLineUps: TeamLineUps, fixedLines: RoleEnum[]) {
   const shuffleArray = (array: string[]) => {
     const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -11,13 +10,35 @@ export default function changeLineUps(teamLineUps: TeamLineUps) {
     return shuffled
   }
 
-  // 각 팀의 현재 플레이어들을 가져와서 섞기
-  const shuffledBlueTeamPlayers = shuffleArray(teamLineUps[TeamEnum.BLUE].map(p => p.player))
-  const shuffledRedTeamPlayers = shuffleArray(teamLineUps[TeamEnum.RED].map(p => p.player))
+  const assignPlayersToRoles = (team: TeamEnum) => {
+    const currentPlayers = teamLineUps[team].map(p => p.player)
+    const movablePlayers = currentPlayers.filter((_, idx) => !fixedLines.includes(idx))
 
-  // 섞인 플레이어들에게 라인 할당
+    // Shuffle only movable players
+    const shuffledMovablePlayers = shuffleArray(movablePlayers)
+
+    // Create final array with fixed players in their positions
+    return currentPlayers.map((_, idx) => {
+      if (fixedLines.includes(idx)) {
+        // Keep fixed player at original position
+        return {
+          player: currentPlayers[idx],
+          role: idx,
+        }
+      } else {
+        // Assign shuffled player to non-fixed position
+        const movableIdx = currentPlayers.slice(0, idx)
+          .filter((_, i) => !fixedLines.includes(i)).length
+        return {
+          player: shuffledMovablePlayers[movableIdx],
+          role: idx,
+        }
+      }
+    })
+  }
+
   return {
-    [TeamEnum.BLUE]: shuffledBlueTeamPlayers.map((player, idx) => ({ player, role: idx })),
-    [TeamEnum.RED]: shuffledRedTeamPlayers.map((player, idx) => ({ player, role: idx })),
+    [TeamEnum.BLUE]: assignPlayersToRoles(TeamEnum.BLUE),
+    [TeamEnum.RED]: assignPlayersToRoles(TeamEnum.RED),
   }
 }
