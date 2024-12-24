@@ -1,6 +1,9 @@
 import { Pair, RoleEnum } from '@/shared/types/teamRole'
 import { Input } from '@/shared/components/ui/input'
 import { ChangeEvent } from 'react'
+import { Button } from '@/shared/components/ui/button'
+import { Icon } from '@/shared/components/icon'
+import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 
 interface MatchBoardProps {
   pairs: Pair[]
@@ -8,6 +11,16 @@ interface MatchBoardProps {
 }
 
 export default function MatchBoard({ pairs, handlePlayerChange }: MatchBoardProps) {
+  const { fixedLines, setFixedLines } = useFixedLinesStore()
+
+  const handleChangeFixedLines = (selectedLine: number) => {
+    if (fixedLines.includes(selectedLine)) {
+      setFixedLines(fixedLines.filter(line => line !== selectedLine))
+    } else {
+      setFixedLines([...fixedLines, selectedLine])
+    }
+  }
+
   return (
     <div className="flex flex-col items-center space-y-4">
       {pairs.map((pair, index) => (
@@ -30,6 +43,11 @@ export default function MatchBoard({ pairs, handlePlayerChange }: MatchBoardProp
               className="flex-1"
             />
           </div>
+          <Button variant="icon" size="icon" onClick={() => handleChangeFixedLines(index)}>
+            {fixedLines.includes(index) ?
+              <Icon name="Pin" size={22} strokeWidth={'1.5'} className="text-slate-800" /> :
+              <Icon name="PinOff" size={22} strokeWidth={'1.5'} className="text-slate-400" />}
+          </Button>
         </div>
       ))}
     </div>
