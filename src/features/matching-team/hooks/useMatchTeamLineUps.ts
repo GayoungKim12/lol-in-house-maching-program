@@ -4,9 +4,12 @@ import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 import changeLineUps from '@/features/matching-team/utils/changeLineUps'
 import matchTeams from '@/features/matching-team/utils/matchTeams'
 import matchInitialLineUps from '@/features/matching-team/utils/matchInitialLineUps'
+import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 
 export default function useMatchTeamLineUps() {
   const { pairs, setPairs } = usePairsStore()
+  const { fixedLines } = useFixedLinesStore()
+
   const [isMatched, setIsMatched] = useState(false)
   const [teamLineUps, setTeamLineUps] = useState<TeamLineUps>({
     [TeamEnum.BLUE]: [], [TeamEnum.RED]: [],
@@ -16,6 +19,10 @@ export default function useMatchTeamLineUps() {
     const newPairs = [...pairs]
     newPairs[pairIndex][player] = value
     setPairs(newPairs)
+  }
+
+  const handleChangeLines = () => {
+    setTeamLineUps(changeLineUps(teamLineUps, fixedLines))
   }
 
   const matchTeamLineUps = () => {
@@ -28,7 +35,7 @@ export default function useMatchTeamLineUps() {
 
     const { blueTeam, redTeam } = matchTeams(pairs)
 
-    setTeamLineUps(changeLineUps(matchInitialLineUps(blueTeam, redTeam)))
+    setTeamLineUps(changeLineUps(matchInitialLineUps(blueTeam, redTeam), fixedLines))
     setIsMatched(true)
   }
 
@@ -37,5 +44,5 @@ export default function useMatchTeamLineUps() {
     setIsMatched(false)
   }
 
-  return { pairs, isMatched, teamLineUps, setTeamLineUps, handlePlayerChange, matchTeamLineUps, resetAll }
+  return { pairs, isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll }
 }
