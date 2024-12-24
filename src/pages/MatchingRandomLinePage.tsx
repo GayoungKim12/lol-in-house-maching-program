@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Button } from '@/shared/components/ui/button'
-import { Shuffle } from 'lucide-react'
 import useMatchTeam from '@/features/matching-team/hooks/useMatchTeam'
 import MatchBoard from '@/features/matching-team/ui/MatchBoard'
 import TeamLineup from '@/features/matching-team/ui/TeamLineup'
+import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
 
 export default function MatchingRandomLinePage() {
   const { pairs, isMatched, teamRoles, handlePlayerChange, matchTeams, changeLines, resetAll } = useMatchTeam()
@@ -24,10 +24,7 @@ export default function MatchingRandomLinePage() {
 
           <div className="flex justify-center gap-4">
             {!isMatched ? (
-              <Button onClick={() => matchTeams('random')} className="w-40">
-                <Shuffle className="mr-2 h-4 w-4" />
-                팀 매칭하기
-              </Button>
+              <MatchTeamButton onClick={() => matchTeams('random')} />
             ) : (
               <div className="flex gap-4">
                 <Button onClick={() => changeLines(teamRoles)} variant="outline" className="w-40"
