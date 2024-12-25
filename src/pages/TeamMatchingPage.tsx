@@ -1,37 +1,23 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import { Card, CardContent } from '@/shared/components/ui/card'
 import { Button } from '@/shared/components/ui/button'
 import useMatchTeamLineUps from '@/features/matching-team/hooks/useMatchTeamLineUps'
 import PlayersSettingBoard from '@/features/matching-team/ui/PlayersSettingBoard'
 import TeamLineUpsBoard from '@/features/matching-team/ui/TeamLineUpsBoard'
 import TeamMatchingButton from '@/features/matching-team/ui/TeamMatchingButton'
-import { Icon } from '@/shared/components/icon'
-import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 import usePairsStore from '@/features/matching-team/stores/usePairsStore'
+import TeamMatchingCardHeader from '@/features/matching-team/ui/TeamMatchingCardHeader'
 
 export default function TeamMatchingPage() {
   const { pairs } = usePairsStore()
-  const { fixedLines, setFixedLines } = useFixedLinesStore()
+
   const {
-    isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll,
+    isMatched, teamLineUps, handlePlayerChange, handleChangeLines, handleSwapTeams, matchTeamLineUps, resetAll,
   } = useMatchTeamLineUps()
-
-  const isAllFixedLines = fixedLines.length === 5
-
-  const handleChangeFixedLines = () => {
-    setFixedLines(isAllFixedLines ? [] : [0, 1, 2, 3, 4])
-  }
 
   return (
     <Card className="flex flex-col w-full max-w-2xl mx-auto p-6 gap-6">
-      <CardHeader className="flex-row items-center justify-between p-0">
-        <span className="w-10"></span>
-        <CardTitle className="text-center">팀 매칭</CardTitle>
-        <Button variant="icon" size="icon" onClick={handleChangeFixedLines} className="margin-0">
-          {isAllFixedLines ?
-            <Icon name="Pin" size={22} strokeWidth={'1.5'} className="text-slate-800" /> :
-            <Icon name="PinOff" size={22} strokeWidth={'1.5'} className="text-slate-400" />}
-        </Button>
-      </CardHeader>
+      <TeamMatchingCardHeader isMatched={isMatched} handleSwapTeams={handleSwapTeams} />
+
       <CardContent className="p-0 w-full">
         <div className="space-y-6">
 

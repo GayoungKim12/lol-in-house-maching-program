@@ -25,6 +25,13 @@ export default function useMatchTeamLineUps() {
     setTeamLineUps(changeLineUps(teamLineUps, fixedLines))
   }
 
+  const handleSwapTeams = () => {
+    setTeamLineUps(prev => ({
+      [TeamEnum.BLUE]: prev[TeamEnum.RED],
+      [TeamEnum.RED]: prev[TeamEnum.BLUE],
+    }))
+  }
+
   const matchTeamLineUps = () => {
     const isAllFilled = pairs.every(pair => pair.player1.trim() !== '' && pair.player2.trim() !== '')
 
@@ -44,5 +51,5 @@ export default function useMatchTeamLineUps() {
     setIsMatched(false)
   }
 
-  return { isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll }
+  return { isMatched, teamLineUps, handlePlayerChange, handleChangeLines, handleSwapTeams, matchTeamLineUps, resetAll }
 }
