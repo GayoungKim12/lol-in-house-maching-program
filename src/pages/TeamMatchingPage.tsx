@@ -6,11 +6,13 @@ import TeamLineup from '@/features/matching-team/ui/TeamLineup'
 import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
 import { Icon } from '@/shared/components/icon'
 import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
+import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 
 export default function TeamMatchingPage() {
+  const { pairs } = usePairsStore()
   const { fixedLines, setFixedLines } = useFixedLinesStore()
   const {
-    pairs, isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll,
+    isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll,
   } = useMatchTeamLineUps()
 
   const isAllFixedLines = fixedLines.length === 5

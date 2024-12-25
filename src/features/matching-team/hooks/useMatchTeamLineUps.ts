@@ -44,5 +44,5 @@ export default function useMatchTeamLineUps() {
     setIsMatched(false)
   }
 
-  return { pairs, isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll }
+  return { isMatched, teamLineUps, handlePlayerChange, handleChangeLines, matchTeamLineUps, resetAll }
 }
