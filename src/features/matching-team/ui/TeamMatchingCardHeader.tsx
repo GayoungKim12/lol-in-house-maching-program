@@ -31,7 +31,7 @@ export default function TeamMatchingCardHeader({ isMatched, handleSwapTeams }: T
         </Button>
       ) : (
         <Button variant="icon" size="icon" onClick={handleSwapTeams}>
-          <Icon name="ArrowRightLeft" />
+          <Icon name="ArrowRightLeft" size={22} strokeWidth={'1.5'} className="text-slate-800" />
         </Button>
       )}
 

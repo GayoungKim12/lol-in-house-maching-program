@@ -36,7 +36,7 @@ export default function TeamMatchingPage() {
                   라인 바꾸기
                 </Button>
                 <Button onClick={resetAll} variant="ghost" className="w-40">
-                  처음부터
+                  팀 바꾸기
                 </Button>
               </div>
             )}
