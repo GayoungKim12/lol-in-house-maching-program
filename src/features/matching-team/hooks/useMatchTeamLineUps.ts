@@ -7,7 +7,7 @@ import matchInitialLineUps from '@/features/matching-team/utils/matchInitialLine
 import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 
 export default function useMatchTeamLineUps() {
-  const { pairs, setPairs } = usePairsStore()
+  const { pairs, setPairs, resetPairs } = usePairsStore()
   const { fixedLines } = useFixedLinesStore()
 
   const [isMatched, setIsMatched] = useState(false)
@@ -47,9 +47,24 @@ export default function useMatchTeamLineUps() {
   }
 
   const resetAll = () => {
+    resetPairs()
     setTeamLineUps({ [TeamEnum.BLUE]: [], [TeamEnum.RED]: [] })
     setIsMatched(false)
   }
 
-  return { isMatched, teamLineUps, handlePlayerChange, handleChangeLines, handleSwapTeams, matchTeamLineUps, resetAll }
+  const resetTeams = () => {
+    setTeamLineUps({ [TeamEnum.BLUE]: [], [TeamEnum.RED]: [] })
+    setIsMatched(false)
+  }
+
+  return {
+    isMatched,
+    teamLineUps,
+    handlePlayerChange,
+    handleChangeLines,
+    handleSwapTeams,
+    matchTeamLineUps,
+    resetAll,
+    resetTeams,
+  }
 }

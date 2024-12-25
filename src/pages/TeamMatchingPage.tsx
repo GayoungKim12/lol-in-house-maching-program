@@ -11,12 +11,19 @@ export default function TeamMatchingPage() {
   const { pairs } = usePairsStore()
 
   const {
-    isMatched, teamLineUps, handlePlayerChange, handleChangeLines, handleSwapTeams, matchTeamLineUps, resetAll,
+    isMatched,
+    teamLineUps,
+    handlePlayerChange,
+    handleChangeLines,
+    handleSwapTeams,
+    matchTeamLineUps,
+    resetAll,
+    resetTeams,
   } = useMatchTeamLineUps()
 
   return (
     <Card className="flex flex-col w-full max-w-2xl mx-auto p-6 gap-6">
-      <TeamMatchingCardHeader isMatched={isMatched} handleSwapTeams={handleSwapTeams} />
+      <TeamMatchingCardHeader isMatched={isMatched} handleSwapTeams={handleSwapTeams} resetAll={resetAll} />
 
       <CardContent className="p-0 w-full">
         <div className="space-y-6">
@@ -35,8 +42,8 @@ export default function TeamMatchingPage() {
                 <Button onClick={handleChangeLines} variant="outline" className="w-40">
                   라인 바꾸기
                 </Button>
-                <Button onClick={resetAll} variant="ghost" className="w-40">
-                  팀 바꾸기
+                <Button onClick={resetTeams} variant="ghost" className="w-40">
+                  팀 초기화
                 </Button>
               </div>
             )}

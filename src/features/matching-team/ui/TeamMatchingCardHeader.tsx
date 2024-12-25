@@ -6,9 +6,10 @@ import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesSto
 interface TeamMatchingCardHeaderProps {
   isMatched: boolean
   handleSwapTeams: () => void
+  resetAll: () => void
 }
 
-export default function TeamMatchingCardHeader({ isMatched, handleSwapTeams }: TeamMatchingCardHeaderProps) {
+export default function TeamMatchingCardHeader({ isMatched, handleSwapTeams, resetAll }: TeamMatchingCardHeaderProps) {
   const { fixedLines, setFixedLines } = useFixedLinesStore()
 
   const isAllFixedLines = fixedLines.length === 5
@@ -19,7 +20,9 @@ export default function TeamMatchingCardHeader({ isMatched, handleSwapTeams }: T
 
   return (
     <CardHeader className="flex-row items-center justify-between p-0">
-      <span className="w-10"></span>
+      <Button variant="icon" size="icon" onClick={resetAll}>
+        <Icon name="RotateCcw" size={22} strokeWidth={'1.5'} className="text-slate-800" />
+      </Button>
       <CardTitle className="text-center">
         {!isMatched ? '팀 매칭' : '팀 라인업'}
       </CardTitle>
