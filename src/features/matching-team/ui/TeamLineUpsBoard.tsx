@@ -1,6 +1,6 @@
 import { RoleEnum, TeamEnum, TeamLineUps } from '@/shared/types/teamRole'
 
-export default function TeamLineup({ teamLineUps }: { teamLineUps: TeamLineUps }) {
+export default function TeamLineUpsBoard({ teamLineUps }: { teamLineUps: TeamLineUps }) {
   return (
     <div className="grid grid-cols-2 gap-8">
       {Object.values(TeamEnum).map((team) => (

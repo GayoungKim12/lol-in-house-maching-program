@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card'
 import { Button } from '@/shared/components/ui/button'
 import useMatchTeamLineUps from '@/features/matching-team/hooks/useMatchTeamLineUps'
-import MatchBoard from '@/features/matching-team/ui/MatchBoard'
-import TeamLineup from '@/features/matching-team/ui/TeamLineup'
-import MatchTeamButton from '@/features/matching-team/ui/MatchTeamButton'
+import PlayersSettingBoard from '@/features/matching-team/ui/PlayersSettingBoard'
+import TeamLineUpsBoard from '@/features/matching-team/ui/TeamLineUpsBoard'
+import TeamMatchingButton from '@/features/matching-team/ui/TeamMatchingButton'
 import { Icon } from '@/shared/components/icon'
 import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 import usePairsStore from '@/features/matching-team/stores/usePairsStore'
@@ -36,14 +36,14 @@ export default function TeamMatchingPage() {
         <div className="space-y-6">
 
           {!isMatched ? (
-            <MatchBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
+            <PlayersSettingBoard pairs={pairs} handlePlayerChange={handlePlayerChange} />
           ) : (
-            <TeamLineup teamLineUps={teamLineUps} />
+            <TeamLineUpsBoard teamLineUps={teamLineUps} />
           )}
 
           <div className="flex justify-center gap-4">
             {!isMatched ? (
-              <MatchTeamButton onClick={() => matchTeamLineUps()} />
+              <TeamMatchingButton onClick={() => matchTeamLineUps()} />
             ) : (
               <div className="flex gap-4">
                 <Button onClick={handleChangeLines} variant="outline" className="w-40">

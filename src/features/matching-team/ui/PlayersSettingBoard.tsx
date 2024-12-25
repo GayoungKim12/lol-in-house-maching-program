@@ -10,7 +10,7 @@ interface MatchBoardProps {
   handlePlayerChange: (pairIndex: number, player: 'player1' | 'player2', value: string) => void
 }
 
-export default function MatchBoard({ pairs, handlePlayerChange }: MatchBoardProps) {
+export default function PlayersSettingBoard({ pairs, handlePlayerChange }: MatchBoardProps) {
   const { fixedLines, setFixedLines } = useFixedLinesStore()
 
   const handleChangeFixedLines = (selectedLine: number) => {
