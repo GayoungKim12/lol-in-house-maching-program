@@ -6,6 +6,7 @@ import TeamLineUpsBoard from '@/features/matching-team/ui/TeamLineUpsBoard'
 import TeamMatchingButton from '@/features/matching-team/ui/TeamMatchingButton'
 import usePairsStore from '@/features/matching-team/stores/usePairsStore'
 import TeamMatchingCardHeader from '@/features/matching-team/ui/TeamMatchingCardHeader'
+import { Icon } from '@/shared/components/icon'
 
 export default function TeamMatchingPage() {
   const { pairs } = usePairsStore()
@@ -36,16 +37,18 @@ export default function TeamMatchingPage() {
 
           <div className="flex justify-center gap-4">
             {!isMatched ? (
-              <TeamMatchingButton onClick={() => matchTeamLineUps()} />
+              <TeamMatchingButton onClick={matchTeamLineUps} />
             ) : (
-              <div className="flex gap-4">
-                <Button onClick={handleChangeLines} variant="outline" className="w-40">
+              <>
+                <Button onClick={handleChangeLines} className="w-36" variant="outline">
+                  <Icon name="ArrowUpDown" size={16} />
                   라인 바꾸기
                 </Button>
-                <Button onClick={resetTeams} variant="ghost" className="w-40">
-                  팀 초기화
+                <Button onClick={resetTeams} className="w-36">
+                  <Icon name="Shuffle" size={16} />
+                  팀 매칭하기
                 </Button>
-              </div>
+              </>
             )}
           </div>
         </div>

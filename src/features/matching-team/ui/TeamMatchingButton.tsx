@@ -3,8 +3,8 @@ import { Button } from '@/shared/components/ui/button'
 
 export default function TeamMatchingButton({ onClick }: { onClick: () => void }) {
   return (
-    <Button onClick={onClick} className="w-40">
-      <Icon name="Shuffle" className="mr-2 h-4 w-4" />
+    <Button onClick={onClick} className="w-36">
+      <Icon name="Shuffle" size={16} />
       팀 매칭하기
     </Button>
   )
