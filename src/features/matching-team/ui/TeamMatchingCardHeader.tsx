@@ -7,9 +7,15 @@ interface TeamMatchingCardHeaderProps {
   isMatched: boolean
   handleSwapTeams: () => void
   resetAll: () => void
+  resetTeams: () => void
 }
 
-export default function TeamMatchingCardHeader({ isMatched, handleSwapTeams, resetAll }: TeamMatchingCardHeaderProps) {
+export default function TeamMatchingCardHeader({
+  isMatched,
+  handleSwapTeams,
+  resetAll,
+  resetTeams,
+}: TeamMatchingCardHeaderProps) {
   const { fixedLines, setFixedLines } = useFixedLinesStore()
 
   const isAllFixedLines = fixedLines.length === 5
@@ -20,12 +26,22 @@ export default function TeamMatchingCardHeader({ isMatched, handleSwapTeams, res
 
   return (
     <CardHeader className="flex-row items-center justify-between p-0">
-      <Button variant="icon" size="icon" onClick={resetAll}>
-        <Icon name="RotateCcw" size={22} strokeWidth={'1.5'} className="text-slate-800" />
-      </Button>
+
+      {!isMatched ? (
+        <Button variant="icon" size="icon" onClick={resetAll}>
+          <Icon name="RotateCcw" size={22} strokeWidth={'1.5'} className="text-slate-800" />
+        </Button>
+      ) : (
+        <Button variant="icon" size="icon" onClick={resetTeams}>
+          <Icon name="ArrowLeft" size={22} strokeWidth={'1.5'} className="text-slate-800" />
+        </Button>
+      )}
+
+
       <CardTitle className="text-center">
         {!isMatched ? '팀 매칭' : '팀 라인업'}
       </CardTitle>
+
       {!isMatched ? (
         <Button variant="icon" size="icon" onClick={handleChangeFixedLines}>
           {isAllFixedLines ?

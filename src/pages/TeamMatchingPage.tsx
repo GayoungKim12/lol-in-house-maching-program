@@ -24,7 +24,8 @@ export default function TeamMatchingPage() {
 
   return (
     <Card className="flex flex-col w-full max-w-2xl mx-auto p-6 gap-6">
-      <TeamMatchingCardHeader isMatched={isMatched} handleSwapTeams={handleSwapTeams} resetAll={resetAll} />
+      <TeamMatchingCardHeader isMatched={isMatched}
+                              handleSwapTeams={handleSwapTeams} resetAll={resetAll} resetTeams={resetTeams} />
 
       <CardContent className="p-0 w-full">
         <div className="space-y-6">
@@ -44,7 +45,7 @@ export default function TeamMatchingPage() {
                   <Icon name="ArrowUpDown" size={16} />
                   라인 바꾸기
                 </Button>
-                <Button onClick={resetTeams} className="w-36">
+                <Button onClick={matchTeamLineUps} className="w-36">
                   <Icon name="Shuffle" size={16} />
                   팀 매칭하기
                 </Button>
