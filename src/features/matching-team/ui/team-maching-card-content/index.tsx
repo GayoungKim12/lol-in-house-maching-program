@@ -24,6 +24,11 @@ export default function TeamMatchingCardContent({
 }: TeamMatchingCardContentProps) {
   const { pairs } = usePairsStore()
 
+  const matchTeamAndSavePlayers = () => {
+    matchTeamLineUps()
+    localStorage.setItem('players', JSON.stringify(pairs))
+  }
+
   return (
     <CardContent className="p-0 w-full">
       <div className="space-y-6">
@@ -36,7 +41,7 @@ export default function TeamMatchingCardContent({
 
         <div className="flex justify-center gap-4">
           {!isMatched ? (
-            <TeamMatchingButton onClick={matchTeamLineUps} />
+            <TeamMatchingButton onClick={matchTeamAndSavePlayers} />
           ) : (
             <>
               <Button onClick={handleChangeLines} className="w-36" variant="outline">
