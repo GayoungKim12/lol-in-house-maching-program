@@ -16,6 +16,8 @@ export default function useMatchTeamLineUps() {
   })
 
   const handlePlayerChange = (pairIndex: number, player: 'player1' | 'player2', value: string) => {
+    if (!pairs) return
+    
     const newPairs = [...pairs]
     newPairs[pairIndex][player] = value
     setPairs(newPairs)
@@ -33,6 +35,8 @@ export default function useMatchTeamLineUps() {
   }
 
   const matchTeamLineUps = () => {
+    if (!pairs) return
+
     const isAllFilled = pairs.every(pair => pair.player1.trim() !== '' && pair.player2.trim() !== '')
 
     if (!isAllFilled) {

@@ -6,7 +6,7 @@ import { Icon } from '@/shared/components/icon'
 import useFixedLinesStore from '@/features/matching-team/stores/useFixedLinesStore'
 
 interface MatchBoardProps {
-  pairs: Pair[]
+  pairs: Pair[] | null
   handlePlayerChange: (pairIndex: number, player: 'player1' | 'player2', value: string) => void
 }
 
@@ -23,7 +23,7 @@ export default function PlayersSettingBoard({ pairs, handlePlayerChange }: Match
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      {pairs.map((pair, index) => (
+      {pairs?.map((pair, index) => (
         <div key={index} className="flex items-center justify-between w-full gap-4">
           <span className="min-w-8">{RoleEnum[index]}</span>
           <div className="flex items-center gap-3 w-full">
