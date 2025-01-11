@@ -18,8 +18,12 @@ export default function LoadPlayerModal() {
   const savedPlayers = localStorage.getItem('players')
 
   useEffect(() => {
-    if (!pairs && savedPlayers) {
-      setIsModalOpen(true)
+    if (!pairs) {
+      if (savedPlayers) {
+        setIsModalOpen(true)
+      } else {
+        resetPairs()
+      }
     }
   }, [pairs, savedPlayers])
 
