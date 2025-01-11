@@ -8,7 +8,7 @@ export default function AppSidebar() {
       <SidebarHeader />
       <SidebarContent>
         {menuItems.map(({ subheading, menuItems }) => (
-          <Group subheading={subheading} menuItems={menuItems} />
+          <Group key={subheading} subheading={subheading} menuItems={menuItems} />
         ))}
       </SidebarContent>
       <SidebarFooter />
