@@ -7,6 +7,10 @@ export const menuItems: Sidebar[] = [
       icon: 'Shuffle',
       label: 'Matching Team',
       to: '/matching-team',
+    }, {
+      icon: 'Search',
+      label: 'Searching User',
+      to: '/user-search',
     }],
 
   },
