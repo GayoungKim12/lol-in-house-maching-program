@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // 라이엇 API 인스턴스 생성
-const riotApi = axios.create({
-  baseURL: `${import.meta.env.VITE_RIOT_API_BASE_URL || 'https://asia.api.riotgames.com'}`,
+const riotKrApi = axios.create({
+  baseURL: `${import.meta.env.VITE_RIOT_KR_API_URL || 'https://asia.api.riotgames.com'}`,
   headers: {
     'Content-Type': 'application/json',
     'X-Riot-Token': `${import.meta.env.VITE_RIOT_API_KEY}`,
@@ -11,7 +11,7 @@ const riotApi = axios.create({
 })
 
 // 응답 에러 처리를 위한 인터셉터
-riotApi.interceptors.response.use(
+riotKrApi.interceptors.response.use(
   (response) => response,
   (error) => {
     console.error('API 요청 오류:', error.response?.data || error.message)
@@ -29,4 +29,4 @@ riotApi.interceptors.response.use(
   },
 )
 
-export default riotApi
+export default riotKrApi
