@@ -1,7 +1,7 @@
-import SearchBar from '@/features/searching-user/ui/SearchBar'
+import SearchContainer from '@/features/searching-user/ui/SearchContainer'
 
 export default function UserSearchPage() {
   return (
-    <SearchBar />
+    <SearchContainer />
   )
 }
