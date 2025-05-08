@@ -1,0 +1,31 @@
+import handleAPIError from '@/shared/lib/utils/handleAPIError'
+import riotKrApi from '@/shared/lib/axios/riotKrApi'
+
+interface LeagueEntry {
+  leagueId: string
+  queueType: string
+  tier: string
+  rank: string
+  summonerId: string
+  puuid: string
+  leaguePoints: number
+  wins: number
+  losses: number
+  veteran: boolean
+  inactive: boolean
+  freshBlood: boolean
+  hotStreak: boolean
+}
+
+export default async function apiGetLeagueEntry(puuid: string) {
+  try {
+    const { data } = await riotKrApi.get<LeagueEntry[]>(`/lol/league/v4/entries/by-summoner/${puuid}`)
+
+    return data
+  } catch {
+    return handleAPIError({
+      errorMessage: '소환사를 찾을 수 없습니다.',
+      errorCode: 404,
+    })
+  }
+}
