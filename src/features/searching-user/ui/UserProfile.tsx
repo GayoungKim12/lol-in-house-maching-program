@@ -13,18 +13,18 @@ export default function UserProfile() {
   if (!(summoner && leagueEntry && 'puuid' in summoner && leagueEntry instanceof Array)) return null
 
   return (
-    <Card className="flex flex-row px-7 items-center">
+    <Card className="flex flex-row px-7 items-center min-h-44">
       <div className="relative w-32 bottom-1">
         <img
           src={`${import.meta.env.VITE_RIOT_PROFILE_ICON_URL}/${summoner.profileIconId}.jpg`}
           alt="프로필 아이콘"
-          className="w-full rounded-3xl"
+          className="w-full rounded-2xl"
         />
-        <Badge className="absolute left-1/2  -translate-x-1/2 z-10 -translate-y-1/2 bg-black">
+        <Badge className="absolute left-1/2 -translate-x-1/2 z-10 -translate-y-1/2 bg-black">
           {summoner.summonerLevel}
         </Badge>
       </div>
-      <div>
+      <div className="flex flex-col justify-start h-full">
         <CardHeader className="flex flex-row items-center space-y-0 pb-3">
           <CardTitle>
             {gameName}
@@ -35,7 +35,7 @@ export default function UserProfile() {
           {/* 소환사 랭크 정보 */}
           <div className="space-y-2">
             <h3 className="text-sm font-medium">랭크 정보</h3>
-            {leagueEntry ? (
+            {leagueEntry.length > 0 ? (
               <div className="flex flex-wrap gap-3">
                 {leagueEntry.map((entry, index) => (
                   <div key={index} className="flex flex-col">
