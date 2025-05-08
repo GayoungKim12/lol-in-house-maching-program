@@ -17,9 +17,9 @@ interface LeagueEntry {
   hotStreak: boolean
 }
 
-export default async function apiGetLeagueEntry(puuid: string) {
+export default async function apiGetLeagueEntry(summonerId: string) {
   try {
-    const { data } = await riotKrApi.get<LeagueEntry[]>(`/lol/league/v4/entries/by-summoner/${puuid}`)
+    const { data } = await riotKrApi.get<LeagueEntry[]>(`/lol/league/v4/entries/by-summoner/${summonerId}`)
 
     return data
   } catch {
