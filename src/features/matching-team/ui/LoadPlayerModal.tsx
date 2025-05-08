@@ -25,7 +25,7 @@ export default function LoadPlayerModal() {
         resetPairs()
       }
     }
-  }, [pairs, savedPlayers])
+  }, [pairs, resetPairs, savedPlayers])
 
   const handleLoad = () => {
     if (savedPlayers) {
