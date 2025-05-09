@@ -4,21 +4,28 @@ import getTierColor from '@/shared/lib/utils/getTierColor'
 import useGetLeagueEntry from '@/features/searching-user/hooks/useGetLeagueEntry'
 import useGetSummoner from '@/features/searching-user/hooks/useGetSummoner'
 import useUserStore from '@/features/searching-user/store/useUserStore'
+import { useState } from 'react'
+import { Skeleton } from '@/shared/components/ui/skeleton'
 
 export default function UserProfile() {
   const { gameName, tagLine } = useUserStore()
   const { data: summoner } = useGetSummoner()
   const { data: leagueEntry } = useGetLeagueEntry()
+  const [isLoaded, setIsLoaded] = useState(false)
 
   if (!(summoner && leagueEntry && 'puuid' in summoner && leagueEntry instanceof Array)) return null
 
   return (
     <Card className="flex flex-row px-7 items-center min-h-44">
-      <div className="relative w-32 bottom-1">
+      <div className="relative bottom-1 w-32">
+        {!isLoaded && (
+          <Skeleton className="w-full h-32 rounded-2xl" />
+        )}
         <img
           src={`${import.meta.env.VITE_RIOT_PROFILE_ICON_URL}/${summoner.profileIconId}.jpg`}
           alt="프로필 아이콘"
-          className="w-full rounded-2xl"
+          className={`w-full rounded-2xl transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          onLoad={() => setIsLoaded(true)}
         />
         <Badge className="absolute left-1/2 -translate-x-1/2 z-10 -translate-y-1/2 bg-black">
           {summoner.summonerLevel}
