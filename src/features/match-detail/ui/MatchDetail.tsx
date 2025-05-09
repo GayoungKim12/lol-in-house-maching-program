@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui
 import { Skeleton } from '@/shared/components/ui/skeleton'
 import { Badge } from '@/shared/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
-import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
+import koreanDayjs from '@/shared/lib/config/koreanDayjs'
+import { MatchInfo, Participant } from '@/features/searching-user/utils/apiGetMatch'
 
 interface MatchDetailProps {
   matchId: string;
@@ -49,7 +50,7 @@ export default function MatchDetail({ matchId }: MatchDetailProps) {
   }
 
   // 게임 생성 시간
-  const gameDate = dayjs(match.info.gameCreation).format('YYYY년 MM월 DD일 HH:mm')
+  const gameDate = koreanDayjs(match.info.gameCreation).format('YYYY년 MM월 DD일 HH:mm')
 
   // 블루팀과 레드팀 분리
   const blueTeam = match.info.participants.filter((p) => p.teamId === 100)
@@ -139,7 +140,7 @@ export default function MatchDetail({ matchId }: MatchDetailProps) {
                 <h3 className="font-bold text-red-600 mb-2">레드팀 상세 정보</h3>
                 <div className="space-y-4">
                   {redTeam.map((player) => (
-                    <PlayerDetailCard key={player.puuid} player={player} />
+                    <PlayerDetailCard key={player.puuid} player={player} match={match} />
                   ))}
                 </div>
               </div>
@@ -154,7 +155,7 @@ export default function MatchDetail({ matchId }: MatchDetailProps) {
 /**
  * 플레이어 간단 정보 행 컴포넌트
  */
-function PlayerRow({ player }: { player: any }) {
+function PlayerRow({ player }: { player: Participant }) {
   return (
     <Link to={`/user-search?username=${encodeURIComponent(player.summonerName)}`} className="block">
       <div className="flex items-center p-2 border rounded-md hover:bg-gray-50">
@@ -200,13 +201,13 @@ function PlayerRow({ player }: { player: any }) {
 /**
  * 플레이어 상세 정보 카드 컴포넌트
  */
-function PlayerDetailCard({ player }: { player: any }) {
+function PlayerDetailCard({ player, match }: { player: Participant, match: MatchInfo }) {
   // KDA 계산
   const kda = player.deaths === 0 ? 'Perfect' : ((player.kills + player.assists) / player.deaths).toFixed(2)
 
   // CS 계산
   const totalCS = player.totalMinionsKilled + player.neutralMinionsKilled
-  const gameMinutes = player.gameDuration / 60
+  const gameMinutes = match.gameDuration / 60
   const csPerMin = (totalCS / gameMinutes).toFixed(1)
 
   return (
