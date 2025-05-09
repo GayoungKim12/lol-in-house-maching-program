@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import UserProfile from '@/features/searching-user/ui/UserProfile'
 import UserProfileSkeleton from '@/features/searching-user/ui/UserProfileSkeleton'
 import SearchGuide from '@/features/searching-user/ui/SearchGuide'
-import ErrorAlert from '@/features/searching-user/ui/ErrorAlert'
 import SearchBar from '@/features/searching-user/ui/SearchBar'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
 import useUserStore from '@/features/searching-user/store/useUserStore'
@@ -25,11 +24,6 @@ export default function SearchContainer() {
   return (
     <div className="w-full max-w-3xl mx-auto space-y-4">
       <SearchBar isLoading={isLoading} setSearchValue={setSearchValue} />
-
-      {/* 에러 메시지 */}
-      {isError && (
-        <ErrorAlert error={error} />
-      )}
 
       {/* 검색 결과 로딩 상태 */}
       {isLoading && (
