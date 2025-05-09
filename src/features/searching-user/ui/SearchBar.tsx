@@ -9,8 +9,8 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({ isLoading }: SearchBarProps) {
-  const { setSearchValue } = useSearchUserStore()
-  const [inputValue, setInputValue] = useState('')
+  const { searchValue, setSearchValue } = useSearchUserStore()
+  const [inputValue, setInputValue] = useState(searchValue)
   const [searchHistory, setSearchHistory] = useState<string[]>([])
 
   // 입력값 변경 처리
