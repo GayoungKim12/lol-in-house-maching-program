@@ -1,15 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import useUserStore from '@/features/searching-user/store/useUserStore'
 import apiGetSummoner from '@/features/searching-user/utils/apiGetSummoner'
+import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
 
 export default function useGetSummoner() {
-  const { puuid } = useUserStore()
+  const { data: riotAccount } = useGetRiotAccount()
 
   return useQuery({
-    queryKey: ['summoner', { puuid }],
+    queryKey: ['summoner', { riotAccount }],
     queryFn: async () => {
-      return await apiGetSummoner(puuid)
+      if (!riotAccount) return
+
+      return await apiGetSummoner(riotAccount.puuid)
     },
-    enabled: !!puuid,
+    placeholderData: undefined,
+    enabled: !!riotAccount,
   })
 }

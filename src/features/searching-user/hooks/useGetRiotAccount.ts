@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import apiGetRiotAccount from '@/features/searching-user/utils/apiGetRiotAccount'
 import handleAPIError from '@/shared/lib/utils/handleAPIError'
+import useSearchUserStore from '@/features/searching-user/store/useSearchUserStore'
 
-export default function useGetRiotAccount(searchValue: string) {
+export default function useGetRiotAccount() {
+  const { searchValue } = useSearchUserStore()
+
   return useQuery({
     queryKey: ['riotAccount', { searchValue }],
     queryFn: async () => {
@@ -18,6 +21,7 @@ export default function useGetRiotAccount(searchValue: string) {
 
       return await apiGetRiotAccount(gameName, tagLine)
     },
+    placeholderData: undefined,
     enabled: !!searchValue,
   })
 }

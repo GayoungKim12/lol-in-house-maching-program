@@ -2,13 +2,14 @@ import { Input } from '@/shared/components/ui/input'
 import { Icon } from '@/shared/components/icon'
 import { Button } from '@/shared/components/ui/button'
 import { ChangeEvent, FormEvent, useState } from 'react'
+import useSearchUserStore from '@/features/searching-user/store/useSearchUserStore'
 
 interface SearchBarProps {
   isLoading: boolean
-  setSearchValue: (value: string) => void
 }
 
-export default function SearchBar({ isLoading, setSearchValue }: SearchBarProps) {
+export default function SearchBar({ isLoading }: SearchBarProps) {
+  const { setSearchValue } = useSearchUserStore()
   const [inputValue, setInputValue] = useState('')
   const [searchHistory, setSearchHistory] = useState<string[]>([])
 
