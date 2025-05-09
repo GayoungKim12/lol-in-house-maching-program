@@ -1,6 +1,7 @@
 import SearchContainer from '@/features/searching-user/ui/SearchContainer'
 import UserProfile from '@/features/searching-user/ui/UserProfile'
-import MatchStatsGraph from '@/features/match-history/ui/MatchStatsGraph'
+import MatchStatsGraph from '@/features/searching-user/ui/MatchStatsGraph'
+import MatchHistory from '@/features/searching-user/ui/MatchHistory'
 
 export default function UserSearchPage() {
   return (
@@ -11,6 +12,8 @@ export default function UserSearchPage() {
         <UserProfile />
 
         <MatchStatsGraph />
+
+        <MatchHistory />
       </div>
     </div>
   )
