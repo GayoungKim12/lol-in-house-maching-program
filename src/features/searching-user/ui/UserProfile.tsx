@@ -3,17 +3,30 @@ import { Badge } from '@/shared/components/ui/badge'
 import getTierColor from '@/shared/lib/utils/getTierColor'
 import useGetLeagueEntry from '@/features/searching-user/hooks/useGetLeagueEntry'
 import useGetSummoner from '@/features/searching-user/hooks/useGetSummoner'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Skeleton } from '@/shared/components/ui/skeleton'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
+import UserProfileSkeleton from '@/features/searching-user/ui/UserProfileSkeleton'
 
 export default function UserProfile() {
-  const { data: riotAccount } = useGetRiotAccount()
-  const { data: summoner } = useGetSummoner()
-  const { data: leagueEntry } = useGetLeagueEntry()
+  const { data: riotAccount, isFetching: isRiotAccountFetching } = useGetRiotAccount()
+  const { data: summoner, isFetching: isSummonerFetching } = useGetSummoner()
+  const { data: leagueEntry, isFetching: isLeagueEntryFetching } = useGetLeagueEntry()
   const [isLoaded, setIsLoaded] = useState(false)
 
-  if (!(summoner && leagueEntry)) return null
+  useEffect(() => {
+    setIsLoaded(false)
+  }, [summoner])
+
+  if (!(summoner && leagueEntry)) {
+    if (isRiotAccountFetching || isSummonerFetching || isLeagueEntryFetching) {
+      return (
+        <UserProfileSkeleton />
+      )
+    } else {
+      return null
+    }
+  }
 
   return (
     <Card className="flex flex-row px-7 items-center min-h-44">
