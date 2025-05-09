@@ -13,7 +13,7 @@ export default function UserProfile() {
   const { data: leagueEntry } = useGetLeagueEntry()
   const [isLoaded, setIsLoaded] = useState(false)
 
-  if (!(summoner && leagueEntry && 'puuid' in summoner && leagueEntry instanceof Array)) return null
+  if (!(summoner && leagueEntry)) return null
 
   return (
     <Card className="flex flex-row px-7 items-center min-h-44">

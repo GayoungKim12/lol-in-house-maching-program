@@ -13,9 +13,6 @@ export default async function apiGetRiotAccount(gameName: string, tagLine: strin
 
     return data
   } catch {
-    return handleAPIError({
-      errorMessage: '소환사를 찾을 수 없습니다.',
-      errorCode: 404,
-    })
+    handleAPIError('소환사를 찾을 수 없습니다.')
   }
 }

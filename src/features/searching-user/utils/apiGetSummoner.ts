@@ -16,9 +16,6 @@ export default async function apiGetSummoner(puuid: string) {
 
     return data
   } catch {
-    return handleAPIError({
-      errorMessage: '소환사를 찾을 수 없습니다.',
-      errorCode: 404,
-    })
+    handleAPIError('소환사를 찾을 수 없습니다.')
   }
 }

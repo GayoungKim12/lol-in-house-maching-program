@@ -31,7 +31,7 @@ export default function SearchContainer() {
       )}
 
       {/* 검색 결과 표시 */}
-      {riotAccount && !isLoading && 'puuid' in riotAccount && (
+      {riotAccount && !isLoading && (
         <UserProfile />
       )}
 
