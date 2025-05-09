@@ -6,13 +6,9 @@ import SearchBar from '@/features/searching-user/ui/SearchBar'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
 import useUserStore from '@/features/searching-user/store/useUserStore'
 
-/**
- * 소환사 검색 컴포넌트
- * 사용자가 'gameName#tagLine' 형식으로 입력하면 라이엇 API를 통해 소환사 정보를 조회합니다.
- */
 export default function SearchContainer() {
   const [searchValue, setSearchValue] = useState('')
-  const { data: riotAccount, isLoading, error, isError } = useGetRiotAccount(searchValue)
+  const { data: riotAccount, isLoading } = useGetRiotAccount(searchValue)
   const { setUser } = useUserStore()
 
   useEffect(() => {
