@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UserProfile from '@/features/searching-user/ui/UserProfile'
 import UserProfileSkeleton from '@/features/searching-user/ui/UserProfileSkeleton'
 import SearchGuide from '@/features/searching-user/ui/SearchGuide'
 import ErrorAlert from '@/features/searching-user/ui/ErrorAlert'
 import SearchBar from '@/features/searching-user/ui/SearchBar'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
+import useUserStore from '@/features/searching-user/store/useUserStore'
 
 /**
  * 소환사 검색 컴포넌트
@@ -12,9 +13,14 @@ import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount
  */
 export default function SearchContainer() {
   const [searchValue, setSearchValue] = useState('')
-
-  // 라이엇 API로 소환사 정보 조회
   const { data: riotAccount, isLoading, error, isError } = useGetRiotAccount(searchValue)
+  const { setUser } = useUserStore()
+
+  useEffect(() => {
+    if (riotAccount) {
+      setUser(riotAccount)
+    }
+  }, [riotAccount, setUser])
 
   return (
     <div className="w-full max-w-3xl mx-auto space-y-4">
