@@ -1,5 +1,6 @@
 import SearchContainer from '@/features/searching-user/ui/SearchContainer'
 import UserProfile from '@/features/searching-user/ui/UserProfile'
+import MatchStatsGraph from '@/features/match-history/ui/MatchStatsGraph'
 
 export default function UserSearchPage() {
   return (
@@ -8,6 +9,8 @@ export default function UserSearchPage() {
 
       <div className="flex flex-col space-y-4">
         <UserProfile />
+
+        <MatchStatsGraph />
       </div>
     </div>
   )
