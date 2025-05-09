@@ -6,7 +6,7 @@ import MatchStatsTabs from '@/features/searching-user/ui/MatchStatsTabs'
  * 매치 통계를 그래프로 시각화하는 컴포넌트
  */
 export default function MatchStatsGraph() {
-  const { matches } = useGetMatchHistory()
+  const { data: matches } = useGetMatchHistory()
 
   if (!matches?.length) {
     return null
