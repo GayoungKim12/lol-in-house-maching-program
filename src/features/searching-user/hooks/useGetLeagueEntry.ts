@@ -8,9 +8,9 @@ export default function useGetLeagueEntry() {
   return useQuery({
     queryKey: ['leagueEntry', { summoner }],
     queryFn: async () => {
-      if (summoner && 'id' in summoner) {
-        return await apiGetLeagueEntry(summoner.id)
-      }
+      if (!summoner) return []
+
+      return await apiGetLeagueEntry(summoner.id)
     },
     enabled: !!summoner,
   })
