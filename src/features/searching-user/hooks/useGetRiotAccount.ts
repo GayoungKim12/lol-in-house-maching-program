@@ -8,12 +8,18 @@ export default function useGetRiotAccount(searchValue: string) {
     queryFn: async () => {
       const parts = searchValue.split('#')
       if (parts.length !== 2) {
-        handleAPIError('Riot ID는 gameName#tagLine 형식이어야 합니다.')
+        handleAPIError({
+          title: '잘못된 형식',
+          description: '게임 아이디는 게임명과 태그라인을 #으로 구분하여 입력해주세요.',
+        })
       }
 
       const [gameName, tagLine] = parts
       if (!gameName || !tagLine) {
-        handleAPIError('gameName과 tagLine은 비어있을 수 없습니다.')
+        handleAPIError({
+          title: '잘못된 형식',
+          description: '게임명과 태그라인을 모두 입력해주세요.',
+        })
       }
 
       return await apiGetRiotAccount(gameName, tagLine)

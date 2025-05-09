@@ -1,3 +1,3 @@
-export default function handleAPIError(errorMessage: string) {
-  throw new Error(errorMessage)
+export default function handleAPIError({ title, description }: { title: string; description: string }) {
+  throw new Error(`${title}|${description}`)
 }

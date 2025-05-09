@@ -23,6 +23,9 @@ export default async function apiGetLeagueEntry(summonerId: string) {
 
     return data
   } catch {
-    handleAPIError('소환사를 찾을 수 없습니다.')
+    handleAPIError({
+      title: '소환사 정보 오류',
+      description: '소환사 정보를 가져오는 데 실패했습니다. 잠시 후 다시 시도해주세요.',
+    })
   }
 }
