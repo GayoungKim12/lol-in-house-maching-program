@@ -5,7 +5,7 @@ import { Badge } from '@/shared/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
 import { Link } from 'react-router-dom'
 import koreanDayjs from '@/shared/lib/config/koreanDayjs'
-import { MatchInfo, Participant } from '@/features/searching-user/utils/apiGetMatch'
+import { Participant } from '@/features/searching-user/utils/apiGetMatch'
 
 interface MatchDetailProps {
   matchId: string;
@@ -130,7 +130,7 @@ export default function MatchDetail({ matchId }: MatchDetailProps) {
                 <h3 className="font-bold text-blue-600 mb-2">블루팀 상세 정보</h3>
                 <div className="space-y-4">
                   {blueTeam.map((player) => (
-                    <PlayerDetailCard key={player.puuid} player={player} />
+                    <PlayerDetailCard key={player.puuid} player={player} gameDuration={match.info.gameDuration} />
                   ))}
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function MatchDetail({ matchId }: MatchDetailProps) {
                 <h3 className="font-bold text-red-600 mb-2">레드팀 상세 정보</h3>
                 <div className="space-y-4">
                   {redTeam.map((player) => (
-                    <PlayerDetailCard key={player.puuid} player={player} match={match} />
+                    <PlayerDetailCard key={player.puuid} player={player} gameDuration={match.info.gameDuration} />
                   ))}
                 </div>
               </div>
@@ -201,13 +201,13 @@ function PlayerRow({ player }: { player: Participant }) {
 /**
  * 플레이어 상세 정보 카드 컴포넌트
  */
-function PlayerDetailCard({ player, match }: { player: Participant, match: MatchInfo }) {
+function PlayerDetailCard({ player, gameDuration }: { player: Participant, gameDuration: number }) {
   // KDA 계산
   const kda = player.deaths === 0 ? 'Perfect' : ((player.kills + player.assists) / player.deaths).toFixed(2)
 
   // CS 계산
   const totalCS = player.totalMinionsKilled + player.neutralMinionsKilled
-  const gameMinutes = match.gameDuration / 60
+  const gameMinutes = gameDuration / 60
   const csPerMin = (totalCS / gameMinutes).toFixed(1)
 
   return (
