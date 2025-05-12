@@ -6,6 +6,7 @@ import { useState } from 'react'
 import getFilteredMatches from '@/features/searching-user/utils/getFilteredMatches'
 import useGetMatchHistory from '@/features/searching-user/hooks/useGetMatchHistory'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
+import MatchHistoryPagination from '@/features/searching-user/ui/MatchHistoryPagination'
 
 export default function MatchHistory() {
   const { data: riotAccount } = useGetRiotAccount()
@@ -29,10 +30,15 @@ export default function MatchHistory() {
           Array(5).map((_, index) => (
             <Skeleton key={index} className="w-full h-24 mb-2" />
           ))
-        ) : filteredMatches?.length ? (
-          filteredMatches.map((match) => (
-            <MatchHistoryItem key={match.metadata.matchId} match={match} />
-          ))
+        ) : filteredMatches.length ? (
+          <>
+            <div className="mb-6">
+              {filteredMatches.map((match) => (
+                <MatchHistoryItem key={match.metadata.matchId} match={match} />
+              ))}
+            </div>
+            <MatchHistoryPagination />
+          </>
         ) : (
           <div className="text-center py-8 text-gray-500">
             {matches?.length ? '필터 조건에 맞는 매치 기록이 없습니다.' : '최근 매치 기록이 없습니다.'}
