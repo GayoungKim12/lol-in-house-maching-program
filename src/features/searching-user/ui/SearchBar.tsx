@@ -23,8 +23,10 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    const encodedInputValue = encodeURIComponent(inputValue.trim())
+
     // 검색어 설정
-    navigate(`/summoner/${inputValue}`)
+    navigate(`/summoner/${encodedInputValue}`)
 
     // 검색 기록에 추가 (중복 제거)
     if (!searchHistory.includes(inputValue.trim())) {
@@ -34,7 +36,9 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
 
   const handleSelectHistory = (value: string) => {
     setInputValue(value)
-    navigate(`/summoner/${value}`)
+
+    const encodedValue = encodeURIComponent(value.trim())
+    navigate(`/summoner/${encodedValue}`)
   }
 
   return (

@@ -12,7 +12,9 @@ export default function useGetRiotAccount() {
     queryFn: async () => {
       if (!summonerName) return
 
-      const parts = summonerName.split('#')
+      const decodedSummonerName = decodeURIComponent(summonerName)
+
+      const parts = decodedSummonerName.split('#')
       if (parts.length !== 2) {
         handleAPIError('INVALID_FORMAT_RIOT_ACCOUNT')
       }
