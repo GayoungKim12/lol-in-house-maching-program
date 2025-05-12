@@ -25,7 +25,7 @@ export interface Item {
 
 export default async function apiGetItems() {
   try {
-    const { data } = await axios(`${import.meta.env.VITE_RIOT_ICON_URL}/items.json`)
+    const { data } = await axios(`${import.meta.env.VITE_RIOT_ICON_URL}/v1/items.json`)
 
     return data as Item[]
   } catch {

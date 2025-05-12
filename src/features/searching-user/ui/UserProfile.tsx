@@ -35,7 +35,7 @@ export default function UserProfile() {
           <Skeleton className="w-full h-32 rounded-2xl" />
         )}
         <img
-          src={`${import.meta.env.VITE_RIOT_ICON_URL}/profile-icons/${summoner.profileIconId}.jpg`}
+          src={`${import.meta.env.VITE_RIOT_ICON_URL}/v1/profile-icons/${summoner.profileIconId}.jpg`}
           alt="프로필 아이콘"
           className={`w-full rounded-2xl transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
           onLoad={() => setIsLoaded(true)}

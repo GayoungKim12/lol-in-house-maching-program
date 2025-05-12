@@ -49,7 +49,7 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
         <div className="flex items-center mr-3">
           <div className="relative">
             <img
-              src={`${import.meta.env.VITE_RIOT_ICON_URL}/champion-icons/${player.championId}.png`}
+              src={`${import.meta.env.VITE_RIOT_ICON_URL}/v1/champion-icons/${player.championId}.png`}
               alt={player.championName}
               className="w-12 h-12 rounded-full"
             />
