@@ -4,6 +4,7 @@ import Layout from '@/app/layout'
 import TeamMatchingPage from '@/pages/TeamMatchingPage'
 import SummonerSearchPage from '@/pages/SummonerSearchPage'
 import MatchDetailPage from '@/pages/MatchDetailPage'
+import SummonerPage from '@/pages/SummonerPage'
 
 export default function AppRouter() {
   return (
@@ -13,7 +14,7 @@ export default function AppRouter() {
         <Route path="/matching-team" element={<TeamMatchingPage />} />
         <Route path="/match/:matchId" element={<MatchDetailPage />} />
         <Route path="/summoner" element={<SummonerSearchPage />} />
-        <Route path="/summoner/:summonerName" element={<SummonerSearchPage />} />
+        <Route path="/summoner/:summonerName" element={<SummonerPage />} />
       </Route>
     </Routes>
   )
