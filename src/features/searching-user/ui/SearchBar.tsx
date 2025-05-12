@@ -1,7 +1,7 @@
 import { Input } from '@/shared/components/ui/input'
 import { Icon } from '@/shared/components/icon'
 import { Button } from '@/shared/components/ui/button'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 interface SearchBarProps {
@@ -12,8 +12,12 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
   const params = useParams()
   const { summonerName } = params
   const navigate = useNavigate()
-  const [inputValue, setInputValue] = useState(summonerName ?? '')
+  const [inputValue, setInputValue] = useState('')
   const [searchHistory, setSearchHistory] = useState<string[]>([])
+
+  useEffect(() => {
+    setInputValue(summonerName ?? '')
+  }, [summonerName])
 
   // 입력값 변경 처리
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
