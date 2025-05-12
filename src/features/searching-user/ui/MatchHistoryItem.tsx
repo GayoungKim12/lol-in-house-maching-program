@@ -39,7 +39,7 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
       <Card
         className={`flex p-3 mb-2 border-l-4 ${player.win ? 'border-l-blue-500' : 'border-l-red-500'} hover:shadow-md transition-shadow`}>
         <div className="flex flex-col items-center justify-center w-16 mr-3">
-          <Badge variant={player.win ? 'default' : 'destructive'} className="mb-1">
+          <Badge variant={player.win ? 'victory' : 'destructive'} className="mb-1">
             {player.win ? '승리' : '패배'}
           </Badge>
           <span className="text-xs text-gray-500">{match.info.gameMode}</span>
@@ -49,24 +49,23 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
         <div className="flex items-center mr-3">
           <div className="relative">
             <img
-              src={`${import.meta.env.VITE_DDRAGON_CHAMPION_URL}/${player.championName}.png`}
+              src={`${import.meta.env.VITE_RIOT_ICON_URL}/champion-icons/${player.championId}.png`}
               alt={player.championName}
               className="w-12 h-12 rounded-full"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Aatrox_0.jpg'
-              }}
             />
-            <Badge className="absolute -bottom-1 -right-1 text-xs">{player.champLevel}</Badge>
+            <span className="absolute -bottom-1 -right-1 text-xs bg-black text-white rounded-full p-1">
+              {player.champLevel}
+            </span>
           </div>
         </div>
 
         <div className="flex flex-col justify-center flex-1">
           <div className="flex items-center mb-1">
-            <span className="font-bold text-lg">{player.kills}</span>
+            <span className="font-bold text-md">{player.kills}</span>
             <span className="mx-1 text-gray-500">/</span>
-            <span className="font-bold text-lg text-red-500">{player.deaths}</span>
+            <span className="font-bold text-md text-red-500">{player.deaths}</span>
             <span className="mx-1 text-gray-500">/</span>
-            <span className="font-bold text-lg">{player.assists}</span>
+            <span className="font-bold text-md">{player.assists}</span>
             <Badge variant="outline" className="ml-2">
               {kda} KDA
             </Badge>
