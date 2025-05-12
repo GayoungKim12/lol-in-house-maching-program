@@ -4,6 +4,8 @@ import { Badge } from '@/shared/components/ui/badge'
 import { Link } from 'react-router-dom'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
 import koreanDayjs from '@/shared/lib/config/koreanDayjs'
+import useGetItemInfo from '@/entities/item/hooks/useGetItemInfo'
+import getItemNames from '@/features/searching-user/utils/getItemNames'
 
 interface MatchHistoryItemProps {
   match: MatchInfo;
@@ -14,6 +16,7 @@ interface MatchHistoryItemProps {
  */
 export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
   const { data: riotAccount } = useGetRiotAccount()
+  const { data: itemInfo } = useGetItemInfo()
 
   // 현재 사용자 정보 찾기
   const player = match.info.participants.find((p) => p.puuid === riotAccount?.puuid)
@@ -82,20 +85,19 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
           </div>
         </div>
 
-        <div className="flex flex-wrap w-28 gap-1 items-center justify-end">
-          {[player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6]
-            .filter((item) => item !== 0)
-            .map((item, index) => (
+        <div className="flex flex-wrap w-28 gap-1 items-center justify-start">
+          {getItemNames(itemInfo ?? new Map([]), player).map((item, index) => {
+            return item ? (
               <img
-                key={index}
-                src={`${import.meta.env.VITE_DDRAGON_ITEM_URL}/${item}.png`}
+                key={`${match.metadata.matchId}-${item}`}
+                src={`${import.meta.env.VITE_RIOT_ICON_URL}/assets/items/icons2d/${item}.png`}
                 alt={`아이템 ${item}`}
                 className="w-6 h-6 rounded"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none'
-                }}
               />
-            ))}
+            ) : (
+              <div key={index} className="w-6 h-6 rounded bg-gray-200" />
+            )
+          })}
         </div>
       </Card>
     </Link>
