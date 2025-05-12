@@ -19,6 +19,10 @@ export const errorMessages = {
     title: '매치 기록 오류',
     description: '매치 기록을 가져오는 데 실패했습니다. 잠시 후 다시 시도해주세요.',
   },
+  NOT_FOUND_ITEM_INFO: {
+    title: '아이템 정보 오류',
+    description: '아이템 정보를 가져오는 데 실패했습니다. 잠시 후 다시 시도해주세요.',
+  },
 }
 
 export type ErrorMessageKey = keyof typeof errorMessages
