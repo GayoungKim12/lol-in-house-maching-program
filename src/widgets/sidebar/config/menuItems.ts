@@ -10,7 +10,7 @@ export const menuItems: Sidebar[] = [
     }, {
       icon: 'Search',
       label: 'Searching User',
-      to: '/user-search',
+      to: '/summoner',
     }],
 
   },
