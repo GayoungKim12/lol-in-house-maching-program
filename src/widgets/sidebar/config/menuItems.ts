@@ -9,7 +9,7 @@ export const menuItems: Sidebar[] = [
       to: '/matching-team',
     }, {
       icon: 'Search',
-      label: 'Searching User',
+      label: 'Summoner',
       to: '/summoner',
     }],
 
