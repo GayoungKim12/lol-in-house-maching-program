@@ -1,15 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import apiGetRiotAccount from '@/features/searching-user/utils/apiGetRiotAccount'
 import handleAPIError from '@/shared/lib/utils/handleAPIError'
-import useSearchUserStore from '@/features/searching-user/store/useSearchUserStore'
+import { useParams } from 'react-router-dom'
 
 export default function useGetRiotAccount() {
-  const { searchValue } = useSearchUserStore()
+  const params = useParams()
+  const { summonerName } = params
 
   return useQuery({
-    queryKey: ['riotAccount', { searchValue }],
+    queryKey: ['riotAccount', { summonerName }],
     queryFn: async () => {
-      const parts = searchValue.split('#')
+      if (!summonerName) return
+
+      const parts = summonerName.split('#')
       if (parts.length !== 2) {
         handleAPIError('INVALID_FORMAT_RIOT_ACCOUNT')
       }
@@ -22,6 +25,6 @@ export default function useGetRiotAccount() {
       return await apiGetRiotAccount(gameName, tagLine)
     },
     placeholderData: undefined,
-    enabled: !!searchValue,
+    enabled: !!summonerName,
   })
 }

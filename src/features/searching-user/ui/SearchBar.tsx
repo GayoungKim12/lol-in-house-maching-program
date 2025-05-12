@@ -2,15 +2,17 @@ import { Input } from '@/shared/components/ui/input'
 import { Icon } from '@/shared/components/icon'
 import { Button } from '@/shared/components/ui/button'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import useSearchUserStore from '@/features/searching-user/store/useSearchUserStore'
+import { useNavigate, useParams } from 'react-router-dom'
 
 interface SearchBarProps {
   isLoading: boolean
 }
 
 export default function SearchBar({ isLoading }: SearchBarProps) {
-  const { searchValue, setSearchValue } = useSearchUserStore()
-  const [inputValue, setInputValue] = useState(searchValue)
+  const params = useParams()
+  const { summonerName } = params
+  const navigate = useNavigate()
+  const [inputValue, setInputValue] = useState(summonerName ?? '')
   const [searchHistory, setSearchHistory] = useState<string[]>([])
 
   // 입력값 변경 처리
@@ -22,7 +24,7 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
     e.preventDefault()
 
     // 검색어 설정
-    setSearchValue(inputValue.trim())
+    navigate(`/summoner/${inputValue}`)
 
     // 검색 기록에 추가 (중복 제거)
     if (!searchHistory.includes(inputValue.trim())) {
@@ -32,7 +34,7 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
 
   const handleSelectHistory = (value: string) => {
     setInputValue(value)
-    setSearchValue(value)
+    navigate(`/summoner/${value}`)
   }
 
   return (
