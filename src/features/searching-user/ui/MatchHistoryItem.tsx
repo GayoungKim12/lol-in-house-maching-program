@@ -8,6 +8,7 @@ import formatSecondsToMinutes from '@/shared/lib/utils/formatSecondsToMinutes'
 import calculateKDA from '@/shared/lib/utils/calculateKDA'
 import useGetItemInfo from '@/entities/item/hooks/useGetItemInfo'
 import getItemNames from '@/features/searching-user/utils/getItemNames'
+import calculateCSPerMinutes from '@/shared/lib/utils/calculateCSPerMinutes'
 
 interface MatchHistoryItemProps {
   match: MatchInfo;
@@ -22,15 +23,9 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
 
   // 현재 사용자 정보 찾기
   const player = match.info.participants.find((p) => p.puuid === riotAccount?.puuid)
+  const totalCS = player ? player.totalMinionsKilled + player.neutralMinionsKilled : 0
 
   if (!player) return null
-
-  // CS 계산
-  const totalCS = player.totalMinionsKilled + player.neutralMinionsKilled
-  const csPerMin = (totalCS / (match.info.gameDuration / 60)).toFixed(1)
-
-  // 게임 생성 시간
-  const gameDate = new Date(match.info.gameCreation)
 
   return (
     <Link to={`/match/${match.metadata.matchId}`} className="block no-underline text-current">
@@ -40,8 +35,12 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
           <Badge variant={player.win ? 'victory' : 'destructive'} className="mb-1">
             {player.win ? '승리' : '패배'}
           </Badge>
-          <span className="text-xs text-gray-500">{match.info.gameMode}</span>
-          <span className="text-xs text-gray-500">{koreanDayjs(gameDate).format('MM/DD')}</span>
+          <span className="text-xs text-gray-500">
+            {match.info.gameMode}
+          </span>
+          <span className="text-xs text-gray-500">
+            {koreanDayjs(new Date(match.info.gameCreation)).format('MM/DD')}
+          </span>
         </div>
 
         <div className="flex items-center mr-4">
@@ -71,7 +70,7 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
 
           <div className="flex text-xs text-gray-500">
             <span>
-              CS {totalCS} ({csPerMin}/분)
+              CS {totalCS} ({calculateCSPerMinutes(totalCS, match.info.gameDuration)}/분)
             </span>
             <span className="mx-2">•</span>
             <span>
