@@ -26,11 +26,11 @@ export default function MatchDetail({ match }: { match: MatchInfo }) {
   }]
 
   return (
-    <Card className="border-t-0 rounded-t-none p-3 pt-6 -mt-4 mb-2">
+    <Card className="border-t-0 rounded-t-none p-4 -mt-6 mb-2">
       {teams.map(({ label, players }) => (
         <Fragment key={label}>
-          <h3 className="text-md font-bold mb-2">{label}</h3>
-          <div className="mb-4">
+          <h3 className="text-md font-bold mb-2 mt-4">{label}</h3>
+          <div className="mb-2">
             <ul className="space-y-2">
               {players.map((player) => {
                 const playerName = player.riotIdGameName + '#' + player.riotIdTagline
@@ -54,7 +54,7 @@ export default function MatchDetail({ match }: { match: MatchInfo }) {
                       <Badge variant="outline" className="ml-2 text-xs h-5">
                         {calculateKDA(player.kills, player.assists, player.deaths)} KDA
                       </Badge>
-                      <span className="ml-2 text-gray-500 w-40">
+                      <span className="ml-2 text-gray-500 w-36 mr-4">
                         {player.totalDamageDealtToChampions.toLocaleString()} 딜량
                       </span>
                       <div className="flex w-28 gap-1 items-center justify-start mr-4">
