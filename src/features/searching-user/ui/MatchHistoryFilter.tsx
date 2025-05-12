@@ -80,7 +80,7 @@ export default function MatchHistoryFilter({ onFilterChange }: MatchHistoryFilte
 
           <div className="space-y-4">
             {gameOptions.map(({ label, options, value }) => (
-              <div>
+              <div key={value}>
                 <div className="text-sm font-medium mb-2">{label}</div>
                 <div className="flex flex-wrap gap-2">
                   {options.map((mode) => (
