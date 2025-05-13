@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui
 import { Link } from 'react-router-dom'
 import koreanDayjs from '@/shared/lib/config/koreanDayjs'
 import { Participant } from '@/features/searching-user/utils/apiGetMatch'
+import { Team } from '@/shared/lib/config/gameOptions'
 
 interface MatchDetailProps {
   matchId: string;
@@ -53,8 +54,8 @@ export default function MatchDetail({ matchId }: MatchDetailProps) {
   const gameDate = koreanDayjs(match.info.gameCreation).format('YYYY년 MM월 DD일 HH:mm')
 
   // 블루팀과 레드팀 분리
-  const blueTeam = match.info.participants.filter((p) => p.teamId === 100)
-  const redTeam = match.info.participants.filter((p) => p.teamId === 200)
+  const blueTeam = match.info.participants.filter((p) => p.teamId === Team.BLUE)
+  const redTeam = match.info.participants.filter((p) => p.teamId === Team.RED)
 
   // 팀별 킬 합계
   const blueTeamKills = blueTeam.reduce((sum, p) => sum + p.kills, 0)
