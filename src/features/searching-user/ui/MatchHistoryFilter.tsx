@@ -3,9 +3,8 @@ import { Button } from '@/shared/components/ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
 import { useState } from 'react'
 import { Icon } from '@/shared/components/icon'
-import { gameOptions } from '@/shared/lib/config/gameOptions'
+import { GameMode, gameOptions } from '@/shared/lib/config/gameOptions'
 
-export type GameMode = 'ALL' | 'CLASSIC' | 'ARAM' | 'URF' | 'OTHER';
 export type GameResult = 'ALL' | 'WIN' | 'LOSE';
 
 export interface MatchFilter {
@@ -22,7 +21,7 @@ interface MatchHistoryFilterProps {
  */
 export default function MatchHistoryFilter({ onFilterChange }: MatchHistoryFilterProps) {
   const [filter, setFilter] = useState<MatchFilter>({
-    gameMode: 'ALL',
+    gameMode: GameMode.ALL,
     result: 'ALL',
   })
   const [isOpen, setIsOpen] = useState(false)
@@ -40,7 +39,7 @@ export default function MatchHistoryFilter({ onFilterChange }: MatchHistoryFilte
   // 필터 초기화
   const resetFilter = () => {
     const defaultFilter: MatchFilter = {
-      gameMode: 'ALL',
+      gameMode: GameMode.ALL,
       result: 'ALL',
     }
     setFilter(defaultFilter)
@@ -48,7 +47,7 @@ export default function MatchHistoryFilter({ onFilterChange }: MatchHistoryFilte
   }
 
   // 활성화된 필터 수 계산
-  const activeFilterCount = Object.values(filter).filter((value) => value !== 'ALL').length
+  const activeFilterCount = Object.values(filter).filter((value) => !(value === 'ALL' || value === GameMode.ALL)).length
 
   return (
     <div className="flex justify-between items-center">

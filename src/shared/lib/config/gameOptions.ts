@@ -1,9 +1,26 @@
+export enum GameMode {
+  ALL = 0,
+  SOLO_RANK = 420,
+  FREE_RANK = 440,
+  NORMAL_BLIND_PICK = 430,
+  NORMAL_DRAFT_PICK = 400,
+  ARAM = 450,
+
+  SPECIAL_MODE = 700,
+  CHERRY = 1700,
+  RANDOM_URF = 900,
+}
+
 export const gameModes = [
-  { value: 'ALL', label: '전체' },
-  { value: 'CLASSIC', label: '소환사의 협곡' },
-  { value: 'ARAM', label: '칼바람 나락' },
-  { value: 'URF', label: 'URF' },
-  { value: 'OTHER', label: '기타' },
+  { value: GameMode.ALL, label: '전체' },
+  { value: GameMode.SOLO_RANK, label: '솔로 랭크' },
+  { value: GameMode.FREE_RANK, label: '자유 랭크' },
+  { value: GameMode.NORMAL_BLIND_PICK, label: '일반(블라인드 픽)' },
+  { value: GameMode.NORMAL_DRAFT_PICK, label: '일반(드래프트 픽)' },
+  { value: GameMode.ARAM, label: '칼바람 나락' },
+  { value: GameMode.CHERRY, label: '아레나' },
+  { value: GameMode.RANDOM_URF, label: '무작위 URF' },
+  { value: GameMode.SPECIAL_MODE, label: '특별 모드' },
 ]
 
 export const gameResults = [
@@ -15,7 +32,10 @@ export const gameResults = [
 export interface GameOption {
   label: string;
   value: 'gameMode' | 'result';
-  options: { value: string; label: string }[];
+  options: {
+    value: string | number
+    label: string
+  }[];
 }
 
 export const gameOptions: GameOption[] = [{

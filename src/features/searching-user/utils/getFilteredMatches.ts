@@ -1,5 +1,6 @@
 import { MatchInfo } from '@/features/searching-user/utils/apiGetMatch'
 import { MatchFilter } from '@/features/searching-user/ui/MatchHistoryFilter'
+import { GameMode } from '@/shared/lib/config/gameOptions'
 
 export default function getFilteredMatches(matches: MatchInfo[], filter: MatchFilter, puuid: string) {
   return matches.filter((match) => {
@@ -9,16 +10,16 @@ export default function getFilteredMatches(matches: MatchInfo[], filter: MatchFi
     if (!player) return false
 
     // 게임 모드 필터
-    if (filter.gameMode !== 'ALL') {
-      if (filter.gameMode === 'CLASSIC' && match.info.gameMode !== 'CLASSIC') {
-        return false
-      } else if (filter.gameMode === 'ARAM' && match.info.gameMode !== 'ARAM') {
-        return false
-      } else if (filter.gameMode === 'URF' && !match.info.gameMode.includes('URF')) {
-        return false
-      } else if (filter.gameMode === 'OTHER' && (match.info.gameMode === 'CLASSIC' || match.info.gameMode === 'ARAM' || match.info.gameMode.includes('URF'))) {
-        return false
+    if (filter.gameMode !== GameMode.ALL) {
+      if (filter.gameMode === match.info.queueId) {
+        return true
       }
+
+      if (filter.gameMode === GameMode.SPECIAL_MODE) {
+        return match.info.queueId > 700 && match.info.queueId < 800
+      }
+
+      return false
     }
 
     // 게임 결과 필터

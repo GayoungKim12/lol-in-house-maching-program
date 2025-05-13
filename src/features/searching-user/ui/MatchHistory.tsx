@@ -7,12 +7,13 @@ import getFilteredMatches from '@/features/searching-user/utils/getFilteredMatch
 import useGetMatchHistory from '@/features/searching-user/hooks/useGetMatchHistory'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
 import MatchHistoryPagination from '@/features/searching-user/ui/MatchHistoryPagination'
+import { GameMode } from '@/shared/lib/config/gameOptions'
 
 export default function MatchHistory() {
   const { data: riotAccount } = useGetRiotAccount()
   const { data: matches, isLoading } = useGetMatchHistory()
   const [filter, setFilter] = useState<MatchFilter>({
-    gameMode: 'ALL',
+    gameMode: GameMode.ALL,
     result: 'ALL',
   })
 
