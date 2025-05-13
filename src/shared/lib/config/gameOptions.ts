@@ -11,6 +11,11 @@ export enum GameMode {
   RANDOM_URF = 900,
 }
 
+export enum Team {
+  BLUE = 100,
+  RED = 200,
+}
+
 export const gameModes = [
   { value: GameMode.ALL, label: '전체' },
   { value: GameMode.SOLO_RANK, label: '솔로 랭크' },
