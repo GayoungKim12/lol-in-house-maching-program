@@ -2,7 +2,7 @@ import { Item } from '@/entities/item/utils/apiGetItems'
 import { Participant } from '@/features/searching-user/utils/apiGetMatch'
 
 export default function getItemNames(itemInfo: Map<number, Item>, player: Participant) {
-  const itemIds = [player.item0, player.item1, player.item2, player.item6, player.item3, player.item4, player.item5]
+  const itemIds = [player.item0, player.item1, player.item2, player.item3, player.item4, player.item5, player.item6]
 
   return itemIds.map((itemId) => {
     const item = itemInfo.get(itemId)
