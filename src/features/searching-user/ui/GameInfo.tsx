@@ -15,7 +15,7 @@ export default function GameInfo({ player, match }: GameInfoProps) {
       <Badge variant={player.win ? 'victory' : 'destructive'} className="mb-5">
         {player.win ? '승리' : '패배'}
       </Badge>
-      <span className="text-xs text-gray-700 mt-1 font-semibold truncate w-14 mb-1">
+      <span className="text-xs text-gray-700 mt-1 font-semibold truncate w-16 mb-1">
         {getGameMode(match.info.queueId)}
       </span>
       <Separator />

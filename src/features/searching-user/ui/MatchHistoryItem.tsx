@@ -45,10 +45,10 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
     <div>
       <Link to={`/match/${match.metadata.matchId}`} className="block no-underline text-current">
         <Card
-          className={`relative flex justify-between items-end mb-2 p-3 border-l-4 ${player.win ? 'border-l-blue-500' : 'border-l-red-500'} hover:shadow-md transition-shadow overflow-x-auto`}>
+          className={`relative flex justify-between items-end mb-2 px-4 py-3 border-l-4 ${player.win ? 'border-l-blue-500' : 'border-l-red-500'} hover:shadow-md transition-shadow overflow-x-auto`}>
           <div className="flex min-w-80">
             <GameInfo player={player} match={match} />
-            <div>
+            <div className="ml-2">
               <ChampionAndKDA player={player} match={match} />
 
               <ItemList player={player} match={match} />
@@ -56,7 +56,7 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
           </div>
 
           <div className="flex items-end md:w-full">
-            <div className="hidden md:flex w-full">
+            <div className="hidden md:flex ml-2 w-full">
               {teams.map(team => (
                 <ul className="flex flex-col gap-0.5 mr-4">
                   {team.players.map(player => (
