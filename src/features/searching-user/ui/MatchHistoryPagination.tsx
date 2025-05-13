@@ -17,18 +17,22 @@ export default function MatchHistoryPagination() {
   return (
     <Pagination>
       <PaginationContent>
-        {page !== 1 && (
+        {page !== 1 ? (
           <PaginationItem>
             <PaginationPrevious href={`#${page - 1}`} />
           </PaginationItem>
+        ) : (
+          <div className="w-10 h-10" />
         )}
-        <PaginationItem>
+        <PaginationItem className="p-3">
           {page}
         </PaginationItem>
-        {matchIds?.length === 10 && (
+        {matchIds?.length === 10 ? (
           <PaginationItem>
             <PaginationNext href={`#${page + 1}`} />
           </PaginationItem>
+        ) : (
+          <div className="w-10 h-10" />
         )}
       </PaginationContent>
     </Pagination>
