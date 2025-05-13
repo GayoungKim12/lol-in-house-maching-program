@@ -9,6 +9,7 @@ import GameInfo from '@/features/searching-user/ui/GameInfo'
 import ChampionAndKDA from '@/features/searching-user/ui/ChampionAndKDA'
 import ItemList from '@/features/searching-user/ui/ItemList'
 import MatchPlayer from '@/features/searching-user/ui/MatchPlayers'
+import { Button } from '@/shared/components/ui/button'
 
 interface MatchHistoryItemProps {
   match: MatchInfo;
@@ -33,25 +34,24 @@ export default function MatchHistoryItem({ match }: MatchHistoryItemProps) {
     <div>
       <Link to={`/match/${match.metadata.matchId}`} className="block no-underline text-current">
         <Card
-          className={`relative flex justify-between items-end mb-2 px-4 py-3 border-l-4 ${player.win ? 'border-l-blue-500' : 'border-l-red-500'} hover:shadow-md transition-shadow overflow-x-auto`}>
-          <div className="flex min-w-80">
+          className={`relative flex justify-between items-start mb-2 p-3 border-l-4 ${player.win ? 'border-l-blue-500' : 'border-l-red-500'} hover:shadow-md transition-shadow overflow-x-auto`}>
+          <div className="flex min-w-92">
             <GameInfo player={player} match={match} />
-            <div className="ml-2">
+            <div>
               <ChampionAndKDA player={player} match={match} />
 
               <ItemList player={player} match={match} />
             </div>
           </div>
 
-          <div className="flex items-end md:w-full">
+          <div className="flex items-end justify-between md:w-full">
             <MatchPlayer match={match} />
 
-            <button className="inline-flex items-center justify-center w-8 h-8 text-gray-500 hover:text-black"
-                    onClick={handleClick}
+            <Button variant="icon" size="icon" onClick={handleClick}
                     aria-label={isOpen ? '상세 닫기' : '상세 보기'}
             >
               <Icon name="ChevronDown" className={`w-5 h-5 ${isOpen && 'rotate-180'} transition`} />
-            </button>
+            </Button>
           </div>
 
         </Card>

@@ -4,6 +4,9 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
   theme: {
     extend: {
+      minWidth: {
+        92: '368px',
+      },
       bottom: {
         0.1: '0.025rem',
         0.25: '0.625rem',

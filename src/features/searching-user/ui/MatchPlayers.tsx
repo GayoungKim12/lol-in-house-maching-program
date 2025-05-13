@@ -18,16 +18,16 @@ export default function MatchPlayer({ match }: MatchPlayerProps) {
   }]
 
   return (
-    <div className="hidden md:flex ml-2 w-full">
+    <div className="hidden md:flex ml-2">
       {teams.map(team => (
-        <ul className="flex flex-col gap-0.5 mr-4">
+        <ul className="flex flex-col gap-0.5 mr-2">
           {team.players.map(player => (
-            <li className="flex text-xs truncate">
+            <li className="flex w-32 text-xs truncate">
               <div className="w-4 h-4 rounded-sm overflow-hidden mr-2">
                 <img src={`${import.meta.env.VITE_RIOT_ICON_URL}/v1/champion-icons/${player.championId}.png`}
                      alt={player.championName} className="w-full h-full aspect-square scale-110" />
               </div>
-              <span className="max-w-32 truncate">
+              <span className="max-w-24 truncate">
                       {player.riotIdGameName + '#' + player.riotIdTagline}
                       </span>
             </li>
