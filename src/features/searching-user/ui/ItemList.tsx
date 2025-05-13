@@ -1,6 +1,6 @@
 import getItemNames from '@/features/searching-user/utils/getItemNames'
 import useGetItemInfo from '@/entities/item/hooks/useGetItemInfo'
-import { MatchInfo } from '@/features/searching-user/utils/apiGetMatch'
+import { MatchInfo, Participant } from '@/features/searching-user/utils/apiGetMatch'
 
 interface ItemListProps {
   player: Participant
