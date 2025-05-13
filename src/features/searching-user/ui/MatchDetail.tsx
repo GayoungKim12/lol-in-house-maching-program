@@ -38,26 +38,26 @@ export default function MatchDetail({ match }: { match: MatchInfo }) {
 
                 return (
                   <li key={player.puuid} className="flex items-center text-xs">
-                    <div className="w-6 h-6 mr-2">
+                    <div className="w-9 h-9 mr-2 rounded-full overflow-hidden">
                       <img src={`${import.meta.env.VITE_RIOT_ICON_URL}/v1/champion-icons/${player.championId}.png`}
-                           alt={player.championName} className="w-full h-full rounded-full" />
+                           alt={player.championName} className="w-full h-full scale-110" />
                     </div>
                     <Link to={`/summoner/${encodedPlayerName}`} className="w-28 truncate text-sm">{playerName}</Link>
                     <div className="flex items-center ml-2">
-                      <div className="flex justify-center w-20">
+                      <div className="flex w-20">
                         <span className="text-sm">{player.kills}</span>
                         <span className="mx-1 text-gray-500">/</span>
                         <span className="text-sm text-red-500">{player.deaths}</span>
                         <span className="mx-1 text-gray-500">/</span>
                         <span className="text-sm">{player.assists}</span>
                       </div>
-                      <Badge variant="outline" className="ml-2 text-xs h-5">
+                      <Badge variant="outline" className="ml-2 text-xs w-20 h-5">
                         {calculateKDA(player.kills, player.assists, player.deaths)} KDA
                       </Badge>
-                      <span className="ml-2 text-gray-500 w-36 mr-4">
+                      <span className="ml-2 text-gray-500 mr-4">
                         {player.totalDamageDealtToChampions.toLocaleString()} 딜량
                       </span>
-                      <div className="flex w-28 gap-1 items-center justify-start mr-4">
+                      <div className="flex w-48 gap-1 items-center justify-start">
                         {getItemNames(itemInfo ?? new Map([]), player).map((item, index) => {
                           return item ? (
                             <img key={`${match.metadata.matchId}-${item}`}
