@@ -2,7 +2,7 @@ import { Input } from '@/shared/components/ui/input'
 import { Icon } from '@/shared/components/icon'
 import { Button } from '@/shared/components/ui/button'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 interface SearchBarProps {
   isLoading: boolean
@@ -11,6 +11,8 @@ interface SearchBarProps {
 export default function SearchBar({ isLoading }: SearchBarProps) {
   const params = useParams()
   const { summonerName } = params
+  const location = useLocation()
+  const pathname = location.pathname.split('/').filter((_, index) => index < 3).join('/')
   const navigate = useNavigate()
   const [inputValue, setInputValue] = useState('')
   const [searchHistory, setSearchHistory] = useState<string[]>([])
@@ -30,7 +32,7 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
     const encodedInputValue = encodeURIComponent(inputValue.trim())
 
     // 검색어 설정
-    navigate(`/summoner/${encodedInputValue}`)
+    navigate(`${pathname}/${encodedInputValue}`)
 
     // 검색 기록에 추가 (중복 제거)
     if (!searchHistory.includes(inputValue.trim())) {
@@ -42,7 +44,7 @@ export default function SearchBar({ isLoading }: SearchBarProps) {
     setInputValue(value)
 
     const encodedValue = encodeURIComponent(value.trim())
-    navigate(`/summoner/${encodedValue}`)
+    navigate(`${pathname}/${encodedValue}`)
   }
 
   return (

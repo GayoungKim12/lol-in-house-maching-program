@@ -172,15 +172,16 @@ export interface Participant {
 
 export interface MatchInfo {
   info: {
-    queueId: number;
-    gameCreation: number;
-    gameDuration: number;
-    gameMode: string;
-    participants: Participant[];
-  };
+    queueId: number
+    gameCreation: number
+    gameDuration: number
+    gameMode: string
+    participants: Participant[]
+  }
   metadata: {
-    matchId: string;
-  };
+    matchId: string
+    participants: string[]
+  }
 }
 
 /**
