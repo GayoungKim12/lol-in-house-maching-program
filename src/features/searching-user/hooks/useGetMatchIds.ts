@@ -7,14 +7,19 @@ export default function useGetMatchIds() {
   const { data: riotAccount } = useGetRiotAccount()
   const location = useLocation()
   const hash = location.hash
+  const isPublicGamePage = location.pathname.includes('/public')
   const page = Number(hash.split('#')[1] ?? 1)
 
   return useQuery({
-    queryKey: ['matchIds', { riotAccount, page }],
+    queryKey: ['matchIds', { riotAccount, page, isPublicGamePage }],
     queryFn: async () => {
       if (!riotAccount) return []
 
-      return await apiGetMatchIds(riotAccount.puuid, (page - 1) * 10)
+      if (isPublicGamePage) {
+        return await apiGetMatchIds(riotAccount.puuid, (page - 1) * 10)
+      } else {
+        return []
+      }
     },
     enabled: !!riotAccount,
   })
