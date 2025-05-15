@@ -18,7 +18,7 @@ export default function RegisterCustomMatchDialog() {
   const { mutate: registerCustomMatch } = useRegisterCustomMatch()
 
   const handleClick = () => {
-    void registerCustomMatch(matchId)
+    void registerCustomMatch(`KR_${matchId}`)
   }
 
   return (
