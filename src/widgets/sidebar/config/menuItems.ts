@@ -13,9 +13,6 @@ export const menuItems: Sidebar[] = [{
     subItems: [{
       label: 'Public',
       to: '/summoner/public',
-    }, {
-      label: 'Custom',
-      to: '/summoner/custom',
     }],
   }],
 }]
