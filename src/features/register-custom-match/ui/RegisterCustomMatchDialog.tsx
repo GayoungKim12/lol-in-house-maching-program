@@ -17,7 +17,7 @@ export default function RegisterCustomMatchDialog() {
   const [matchId, setMatchId] = useState('')
   const { mutate: registerCustomMatch } = useRegisterCustomMatch()
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     void registerCustomMatch(`KR_${matchId}`)
   }
 
@@ -50,7 +50,7 @@ export default function RegisterCustomMatchDialog() {
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onSubmit={handleSubmit}>제출</Button>
+          <Button onClick={handleClick}>제출</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
