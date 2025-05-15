@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import apiGetMatchIds from '@/features/searching-user/utils/apiGetMatchIds'
 import useGetRiotAccount from '@/features/searching-user/hooks/useGetRiotAccount'
 import { useLocation } from 'react-router-dom'
+import apiGetCustomMatchIds from '@/features/searching-user/utils/apiGetCustomMatchIds'
 
 export default function useGetMatchIds() {
   const { data: riotAccount } = useGetRiotAccount()
@@ -18,7 +19,7 @@ export default function useGetMatchIds() {
       if (isPublicGamePage) {
         return await apiGetMatchIds(riotAccount.puuid, (page - 1) * 10)
       } else {
-        return []
+        return await apiGetCustomMatchIds(riotAccount.puuid)
       }
     },
     enabled: !!riotAccount,
